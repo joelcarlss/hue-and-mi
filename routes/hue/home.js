@@ -4,7 +4,8 @@ module.exports = (server, hue) => {
     next()
   })
   server.get('/things/hue/model', async (req, res, next) => {
-    res.send('hello')
+    let result = await hue.getDescription()
+    res.send(result)
     next()
   })
   server.get('/things/hue/actions', async (req, res, next) => {

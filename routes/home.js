@@ -1,10 +1,10 @@
-module.exports = (server) => {
+module.exports = (server, local) => {
   server.get('/', async (req, res, next) => {
     res.send('Welcome')
     next()
   })
   server.get('/model', async (req, res, next) => {
-    res.send('')
+    res.send(local.getAboutData())
     next()
   })
   server.get('/actions', async (req, res, next) => {

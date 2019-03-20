@@ -10,11 +10,19 @@ class Hue {
     this.host = process.env.HUE_IP
     this.device = false
   }
+
+  // Gateway functionality
   async connect () {
     this.api = new HueApi(this.host, this.username)
     let description = await this.getDescription()
     return 'Connected to: ' + description.name
   }
+
+  async getDescription () {
+    let result = this.api.getDescription()
+    return result
+  }
+
   async findBridges () {
     try {
       let bridges = await hue.upnpSearch()
@@ -23,6 +31,9 @@ class Hue {
       console.log(e)
     }
   }
+
+  // User
+
   // Requires bridge button to be pressed
   // Returns username
   async registerUser (ip) {
@@ -30,16 +41,8 @@ class Hue {
     this.username = result
     return result
   }
-  async getDescription () {
-    let result = this.api.getDescription()
-    return result
-  }
   async getUsers () {
     let result = this.api.registeredUsers()
-    return result
-  }
-  async getFullState () {
-    let result = this.api.fullState()
     return result
   }
   // Returns true if user is deleted
@@ -47,8 +50,16 @@ class Hue {
     let result = this.api.deleteUser(username)
     return result
   }
-  async getLights (username) {
-    let {lights} = this.api.lights()
+
+  // Returns state for every unit
+  async getFullState () {
+    let result = this.api.fullState()
+    return result
+  }
+
+  // Returns all lights
+  async getLights () {
+    let {lights} = await this.api.lights()
     return lights
   }
   async getTemperatureSensors () {
