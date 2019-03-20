@@ -76,6 +76,16 @@ class Hue {
     return result
   }
 
+  // Uses percentage
+  async setBrightness (id, percentage) {
+    let state = hue.lightState.create().brightness(percentage)
+    let result = await this.api.setLightState(id, state)
+    if (result) {
+      result = {value: percentage}
+    }
+    return result
+  }
+
   async getTemperatureSensors () {
     let arr = []
     let sensors = await this.getSensors()
@@ -157,8 +167,24 @@ class Hue {
     })
     return arr
   }
-}
 
-// Rooms
+  // Rooms
+
+  async getRooms () {
+    let result = await this.api.groups()
+    result = result.filter(room => room.type === 'Room')
+    return result
+  }
+  async getRoomById (id) {
+    let result = await this.api.getGroup(id)
+    return result
+  }
+  async setRoomStateById (id, bool) {
+    let createState = hue.lightState.create()
+    let state = bool ? createState.turnOn() : createState.turnOff()
+    let result = await this.api.setGroupLightState(id, state)
+    return result
+  }
+}
 
 module.exports = Hue
