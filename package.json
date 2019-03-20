@@ -1,0 +1,20 @@
+{
+  "name": "iot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon"
+  },
+  "author": "jc222mw",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
+    "miio": "^0.15.6",
+    "node-hue-api": "^2.4.4",
+    "nodemon": "^1.18.10",
+    "restify": "^8.0.0"
+  }
+}

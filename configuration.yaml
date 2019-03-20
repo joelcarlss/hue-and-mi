@@ -1,0 +1,4 @@
+vacuum:
+  - platform: xiaomi_miio
+    host: 192.168.0.17
+    token: 696c6f5932715463594f32666f313068
