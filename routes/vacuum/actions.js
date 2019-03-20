@@ -1,5 +1,5 @@
 module.exports = (server, vacuum) => {
-  server.post('/vacuum/clean', async (req, res, next) => {
+  server.post('/things/vacuum/actions/clean', async (req, res, next) => {
     try {
       let result = await vacuum.clean()
       console.log(result)
@@ -10,9 +10,9 @@ module.exports = (server, vacuum) => {
     }
     next()
   })
-  server.del('/vacuum/clean', async (req, res, next) => {
+  server.post('/things/vacuum/actions/stop', async (req, res, next) => {
     try {
-      let result = await vacuum.dock()
+      let result = await vacuum.dock() // TODO: This doesnt even work
       console.log(result)
       res.send(result)
     } catch (e) {
