@@ -62,6 +62,20 @@ class Hue {
     let {lights} = await this.api.lights()
     return lights
   }
+
+  // Single Light
+  async getLightStateById (id) {
+    let result = await this.api.lightStatus(id)
+    return result
+  }
+
+  async setLightState (id, bool) {
+    let createState = hue.lightState.create()
+    let state = bool ? createState.turnOn() : createState.turnOff()
+    let result = await this.api.setLightState(id, state)
+    return result
+  }
+
   async getTemperatureSensors () {
     let arr = []
     let sensors = await this.getSensors()
@@ -72,6 +86,7 @@ class Hue {
     })
     return arr
   }
+
   async getDaylightSensors () {
     let arr = []
     let sensors = await this.getSensors()
@@ -82,6 +97,7 @@ class Hue {
     })
     return arr
   }
+
   async getLastActiveSensor () {
     let obj = {}
     let highestNumber = 0
@@ -142,5 +158,7 @@ class Hue {
     return arr
   }
 }
+
+// Rooms
 
 module.exports = Hue
