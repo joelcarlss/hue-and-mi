@@ -3,8 +3,10 @@ require('dotenv').config()
 const restify = require('restify')
 const bodyParser = require('body-parser')
 const Hue = require('./model/Hue')
+const Vacuum = require('./model/Vacuum')
 const Local = require('./model/Local')
 
+const vacuum = new Vacuum()
 // vacuum.connect().then(console.log)
 
 const hue = new Hue()
