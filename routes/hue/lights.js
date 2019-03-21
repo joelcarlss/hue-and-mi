@@ -2,7 +2,7 @@ const utils = require('../../utils/hue')
 module.exports = (server, hue) => {
 // All Lights
   server.get('/things/hue/lights', async (req, res, next) => {
-    res.send()
+    res.send('HATEOAS HERE?')
     next()
   })
 
