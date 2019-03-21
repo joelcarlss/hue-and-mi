@@ -18,7 +18,8 @@ module.exports = (server, vacuum) => {
     next()
   })
   server.get('/things/vacuum/properties', async (req, res, next) => {
-    res.send('hello')
+    let result = await vacuum.getState()
+    res.send(result)
     next()
   })
 }

@@ -39,8 +39,12 @@ class Vacuum {
     const result = await this.device.clean()
     return result
   }
+  async stop () {
+    const result = await this.device.stop()
+    return result
+  }
   async dock () {
-    const result = await this.device.dock() // This doesnt work
+    const result = await this.device.changeFanSpeed(0)
     return result
   }
 }
