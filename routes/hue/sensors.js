@@ -10,7 +10,9 @@ module.exports = (server, hue) => {
     let result
     try {
       result = await hue.getSensors()
-    //   result = result.map(({id, type, name, modelid, manufacturername, productname, productid}) => ({name, type, id, modelid, manufacturername, productname, productid}))
+      result = result.map(({id, type, name, modelid, manufacturername, productname, swversion, config}) => (
+          {name, type, id, modelid, manufacturername, productname, swversion, config})
+          )
     } catch (e) {
       result = utils.handleError(e)
     }
@@ -33,15 +35,19 @@ module.exports = (server, hue) => {
   server.get('/things/hue/sensors/:id/model', async (req, res, next) => {
 
   })
-  // Sensors by id actions
-  server.get('/things/hue/sensors/:id/actions', async (req, res, next) => {
-    res.send('hello')
-    next()
-  })
 
   // Sensors by id properties
   server.get('/things/hue/sensors/:id/properties', async (req, res, next) => {
-    res.send('hello')
+    let result
+    try {
+      result = await hue.getSensors()
+      result = result.map(({id, type, name, modelid, manufacturername, productname, swversion, config}) => (
+          {name, type, id, modelid, manufacturername, productname, swversion, config})
+          )
+    } catch (e) {
+      result = utils.handleError(e)
+    }
+    res.send(result)
     next()
   })
 }

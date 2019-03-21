@@ -108,6 +108,13 @@ class Hue {
     return arr
   }
 
+  async getMovementSensors () {
+    let switches = await this.getSwitches()
+    let sensors = await this.getMovementSensors()
+    let result = switches.concat(sensors)
+    return result
+  }
+
   async getLastActiveSensor () {
     let obj = {}
     let highestNumber = 0
@@ -122,13 +129,6 @@ class Hue {
       }
     })
     return obj
-  }
-
-  async getInteractionSensors () {
-    let switches = await this.getSwitches()
-    let sensors = await this.getMovementSensors()
-    let result = switches.concat(sensors)
-    return result
   }
 
   async getSwitches () {

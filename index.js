@@ -30,6 +30,7 @@ require('./routes/hue/actions')(server, hue)
 require('./routes/hue/properties')(server, hue)
 require('./routes/hue/rooms')(server, hue)
 require('./routes/hue/lights')(server, hue)
+require('./routes/hue/sensors')(server, hue)
 
 require('./routes/vacuum/home')(server, vacuum)
 require('./routes/vacuum/actions')(server, vacuum)
