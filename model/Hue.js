@@ -1,5 +1,6 @@
 require('dotenv').config()
-var converter = require('@q42philips/hue-color-converter')
+let utils = require('../utils/hue')
+let converter = require('@q42philips/hue-color-converter')
 let hue = require('node-hue-api')
 var HueApi = require('node-hue-api').HueApi
 var hueApi = new HueApi()
@@ -66,8 +67,12 @@ class Hue {
 
   // Single Light
   async getLightStateById (id) {
-    let result = await this.api.lightStatus(id)
-    return result
+    let light = await this.api.lightStatus(id)
+    let x = light.state.xy[0]
+    let y = light.state.xy[1]
+    let bri = light.state.bri
+    light.state.rgb = utils.xyBriToRgb(x, y, bri)
+    return light
   }
 
   async setLightState (id, bool) {
@@ -89,9 +94,10 @@ class Hue {
   async setRgbColor (id, rgb) {
     let result
     let {r, g, b} = rgb
-    let light = this.getLightStateById(id)
+    let light = await this.getLightStateById(id)
     if (light.state.colormode === 'xy') {
       let xy = converter.calculateXY(r, g, b)
+      console.log(xy)
       let state = hue.lightState.create().xy(xy)
       result = await this.api.setLightState(id, state)
     } else {

@@ -90,7 +90,8 @@ module.exports = (server, hue) => {
     let result
     try {
       let id = req.params.id
-      let {r, g, b} = req.body
+      let body = req.body
+      let {r, g, b} = body
       console.log({r, g, b})
       result = await hue.setRgbColor(id, {r, g, b})
     } catch (e) {
