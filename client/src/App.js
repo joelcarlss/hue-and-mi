@@ -6,7 +6,7 @@ import NotFound from './components/NotFound/NotFound'
 import './App.css'
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <div>
         <Router history={history}>

@@ -2,11 +2,9 @@ require('dotenv').config()
 
 const restify = require('restify')
 const bodyParser = require('body-parser')
-const Vacuum = require('./model/Vacuum')
 const Hue = require('./model/Hue')
 const Local = require('./model/Local')
 
-let vacuum = new Vacuum()
 // vacuum.connect().then(console.log)
 
 const hue = new Hue()
@@ -20,7 +18,7 @@ async function test () {
 
 var server = restify.createServer()
 
-server.use(bodyParser.urlencoded({extended: true}))
+server.use(bodyParser.urlencoded({ extended: true }))
 // server.use(jwt({ secret: process.env.SECRET }).unless({path: ['/', '/auth', '/user']}))
 
 require('./routes/home')(server, local)

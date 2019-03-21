@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import '../../App.css'
-import { Modal, Icon } from 'antd';
-import { handleLights } from '../../actions/lightsActions'
+import { Modal, Icon, Slider } from 'antd';
+import { } from '../../actions/lightsActions'
 import '../../App.css'
 class ModalRoom extends Component {
 
-    state = { visible: false }
+    state = { visible: false, disabled: false, }
 
     showModal = () => {
         this.setState({
@@ -28,11 +28,15 @@ class ModalRoom extends Component {
     }
 
     toggelLight = () => {
-        handleLights()
     }
 
+    handleDisabledChange = (disabled) => {
+        this.setState({ disabled });
+    }
 
     render() {
+
+        const { disabled } = this.state;
 
         return (
             <div>
@@ -46,10 +50,15 @@ class ModalRoom extends Component {
                     visible={this.state.visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
+                    width={700}
                 >
                     <div className="textbox">
                         <div onClick={this.toggelLight} className="alignleft" >
                             <Icon type="bulb" text="Turn on" /> Turn on
+                        </div>
+
+                        <div className="middle">
+                            <Slider defaultValue={30} disabled={disabled} />
                         </div>
                         <div className="alignright" >
                             Light ID
