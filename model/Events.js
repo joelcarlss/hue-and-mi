@@ -1,11 +1,11 @@
-class Events {
+class CleanOnEvent {
     constructor () {
-      this.device = false
+        this.between = ['0900', '1500']
     }
-    getAboutData () {
-      
+    set () {
+        console.log('hej') 
     }
-  }
+}
   
-  module.exports = Events
+  module.exports = CleanOnEvent
   
