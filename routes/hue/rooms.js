@@ -1,5 +1,6 @@
 const utils = require('../../utils/hue')
 module.exports = (server, hue) => {
+
     // ROOMS
 
   server.get('/things/hue/rooms', async (req, res, next) => {
@@ -32,7 +33,7 @@ module.exports = (server, hue) => {
     try {
       let id = req.params.id
       result = await hue.getRoomById(id)
-      .then((room) => ({id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class}))
+        .then((room) => ({ id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class }))
     } catch (e) {
       result = utils.handleError(e)
     }
@@ -101,7 +102,7 @@ module.exports = (server, hue) => {
     try {
       let id = req.params.id
       result = await hue.getRoomById(id)
-      .then((room) => ({id: room.id, name: room.name, lights: room.lights}))
+        .then((room) => ({ id: room.id, name: room.name, lights: room.lights }))
     } catch (e) {
       result = utils.handleError(e)
     }

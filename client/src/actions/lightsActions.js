@@ -5,8 +5,29 @@ export const toggelAllLightsInRoom = (id, bool) => {
   // true or false
 }
 
-export const toggelLightInRom = (id, bool) => {
-  // toggel one light in a room
+export const toggelLightInRoom = (id, bool) => {
+  let params = new URLSearchParams()
+
+  params.append('state', true)
+
+  axios.post(`things/hue/lights/${id}/actions/state`, params)
+    .then(function (response) {
+      console.log(response)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
+export const getLampState = (id) => {
+
+  axios.get(`things/hue/lights/${id}/properties`)
+    .then(function (response) {
+      console.log(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
 }
 
 export const adjustBrightnessInRoom = (id, procent) => {
@@ -14,5 +35,5 @@ export const adjustBrightnessInRoom = (id, procent) => {
 }
 
 export const adjustLigthBrigthness = (id, procent) => {
-  // adjust single light 
+  // adjust single light
 }

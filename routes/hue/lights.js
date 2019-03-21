@@ -1,6 +1,6 @@
 const utils = require('../../utils/hue')
 module.exports = (server, hue) => {
-// All Lights
+  // All Lights
   server.get('/things/hue/lights', async (req, res, next) => {
     res.send('HATEOAS HERE?')
     next()
@@ -10,7 +10,7 @@ module.exports = (server, hue) => {
     let result
     try {
       result = await hue.getLights()
-      result = result.map(({id, type, name, modelid, manufacturername, productname, productid}) => ({name, type, id, modelid, manufacturername, productname, productid}))
+      result = result.map(({ id, type, name, modelid, manufacturername, productname, productid }) => ({ name, type, id, modelid, manufacturername, productname, productid }))
     } catch (e) {
       result = utils.handleError(e)
     }
@@ -28,7 +28,7 @@ module.exports = (server, hue) => {
     let result
     try {
       result = await hue.getLights()
-      result = result.map(({id, state, type, name}) => ({name, type, id, state}))
+      result = result.map(({ id, state, type, name }) => ({ name, type, id, state }))
     } catch (e) {
       result = utils.handleError(e)
     }
@@ -43,7 +43,7 @@ module.exports = (server, hue) => {
       let id = req.params.id
 
       result = await hue.getLightStateById(id)
-      .then(({id, type, name, modelid, manufacturername, productname, productid}) => ({name, type, id, modelid, manufacturername, productname, productid}))
+        .then(({ id, type, name, modelid, manufacturername, productname, productid }) => ({ name, type, id, modelid, manufacturername, productname, productid }))
     } catch (e) {
       result = utils.handleError(e)
     }
@@ -60,7 +60,11 @@ module.exports = (server, hue) => {
   server.put('/things/hue/lights/:id/actions/state', async (req, res, next) => {
     let result
     try {
+      console.log(req.params.id)
+
       let id = req.params.id
+      console.log(req.body.state)
+
       let state = JSON.parse(req.body.state)
       result = await hue.setLightState(id, state)
     } catch (e) {
@@ -104,7 +108,7 @@ module.exports = (server, hue) => {
       let id = req.params.id
 
       result = await hue.getLightStateById(id)
-      .then(({id, state, type, name}) => ({name, type, id, state}))
+        .then(({ id, state, type, name }) => ({ name, type, id, state }))
     } catch (e) {
       result = utils.handleError(e)
     }
