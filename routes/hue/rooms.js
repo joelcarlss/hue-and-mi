@@ -1,18 +1,8 @@
 const utils = require('../../utils/hue')
 module.exports = (server, hue) => {
     // ROOMS
+
   server.get('/things/hue/rooms', async (req, res, next) => {
-    let result
-    try {
-
-    } catch (e) {
-      result = utils.handleError(e)
-    }
-    res.send(result)
-    next()
-  })
-
-  server.get('/things/hue/rooms/model', async (req, res, next) => {
     let result
     try {
       result = await hue.getRooms()
