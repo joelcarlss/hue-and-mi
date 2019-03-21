@@ -14,16 +14,12 @@ module.exports = (server, hue) => {
     next()
   })
 
-  server.get('/things/hue/rooms/actions', async (req, res, next) => {
-    res.send('hello')
-    next()
-  })
   server.get('/things/hue/rooms/properties', async (req, res, next) => {
     res.send('hello')
     next()
   })
   server.get('/things/hue/rooms/properties/states', async (req, res, next) => {
-    res.send('hello')
+    res.send('brightness, isOn?')
     next()
   })
 
@@ -59,6 +55,20 @@ module.exports = (server, hue) => {
     res.send(result)
     next()
   })
+
+  server.post('/things/hue/rooms/:id/actions/brightness', async (req, res, next) => {
+    let result
+    try {
+      let id = req.params.id
+      let data = JSON.parse(req.body.percentage)
+      result = await hue.setRoomBrightnessById(id, data)
+    } catch (e) {
+      result = utils.handleError(e)
+    }
+    res.send(result)
+    next()
+  })
+
   // Rooms by id properties
   server.get('/things/hue/rooms/:id/properties', async (req, res, next) => {
     let result

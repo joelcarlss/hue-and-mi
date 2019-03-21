@@ -201,6 +201,11 @@ class Hue {
     let result = await this.api.setGroupLightState(id, state)
     return result
   }
+  async setRoomBrightnessById (id, percentage) {
+    let state = hue.lightState.create().brightness(percentage)
+    let result = await this.api.setGroupLightState(id, state)
+    return result
+  }
 }
 
 module.exports = Hue
