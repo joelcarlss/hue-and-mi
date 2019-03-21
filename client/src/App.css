@@ -13,6 +13,10 @@
 Navbar
 */
 
+.modal {
+    background: #000;
+}
+
 .menuStyle {
     height: 100%;
     width: 240px;
@@ -61,15 +65,22 @@ Dashboard
 }
 
 .textbox {
-    margin-bottom: 4%
+    margin-bottom: 4%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
 }
 
 .alignleft {
-    float: left;
+    line-height: 2.6;
 }
 
 .alignright {
-    float: right;
+    line-height: 2.6;
+}
+
+.middle {
+    width: 410px;
 }
 
 /* 

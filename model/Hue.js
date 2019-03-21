@@ -10,11 +10,19 @@ class Hue {
     this.host = process.env.HUE_IP
     this.device = false
   }
+
+  // Gateway functionality
   async connect () {
     this.api = new HueApi(this.host, this.username)
     let description = await this.getDescription()
     return 'Connected to: ' + description.name
   }
+
+  async getDescription () {
+    let result = this.api.getDescription()
+    return result
+  }
+
   async findBridges () {
     try {
       let bridges = await hue.upnpSearch()
@@ -23,6 +31,9 @@ class Hue {
       console.log(e)
     }
   }
+
+  // User
+
   // Requires bridge button to be pressed
   // Returns username
   async registerUser (ip) {
@@ -30,16 +41,8 @@ class Hue {
     this.username = result
     return result
   }
-  async getDescription () {
-    let result = this.api.getDescription()
-    return result
-  }
   async getUsers () {
     let result = this.api.registeredUsers()
-    return result
-  }
-  async getFullState () {
-    let result = this.api.fullState()
     return result
   }
   // Returns true if user is deleted
@@ -47,10 +50,42 @@ class Hue {
     let result = this.api.deleteUser(username)
     return result
   }
-  async getLights (username) {
-    let {lights} = this.api.lights()
+
+  // Returns state for every unit
+  async getFullState () {
+    let result = this.api.fullState()
+    return result
+  }
+
+  // Returns all lights
+  async getLights () {
+    let {lights} = await this.api.lights()
     return lights
   }
+
+  // Single Light
+  async getLightStateById (id) {
+    let result = await this.api.lightStatus(id)
+    return result
+  }
+
+  async setLightState (id, bool) {
+    let createState = hue.lightState.create()
+    let state = bool ? createState.turnOn() : createState.turnOff()
+    let result = await this.api.setLightState(id, state)
+    return result
+  }
+
+  // Uses percentage
+  async setBrightness (id, percentage) {
+    let state = hue.lightState.create().brightness(percentage)
+    let result = await this.api.setLightState(id, state)
+    // if (result) {
+    //   result = {value: percentage}
+    // }
+    return result
+  }
+
   async getTemperatureSensors () {
     let arr = []
     let sensors = await this.getSensors()
@@ -61,6 +96,7 @@ class Hue {
     })
     return arr
   }
+
   async getDaylightSensors () {
     let arr = []
     let sensors = await this.getSensors()
@@ -71,6 +107,7 @@ class Hue {
     })
     return arr
   }
+
   async getLastActiveSensor () {
     let obj = {}
     let highestNumber = 0
@@ -129,6 +166,24 @@ class Hue {
       }
     })
     return arr
+  }
+
+  // Rooms
+
+  async getRooms () {
+    let result = await this.api.groups()
+    result = result.filter(room => room.type === 'Room')
+    return result
+  }
+  async getRoomById (id) {
+    let result = await this.api.getGroup(id)
+    return result
+  }
+  async setRoomStateById (id, bool) {
+    let createState = hue.lightState.create()
+    let state = bool ? createState.turnOn() : createState.turnOff()
+    let result = await this.api.setGroupLightState(id, state)
+    return result
   }
 }
 

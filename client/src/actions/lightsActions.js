@@ -1,18 +1,18 @@
-const axios = require('axios');
+const axios = require('axios')
 
-export const handleLights = (value) => {
+export const toggelAllLightsInRoom = (id, bool) => {
+  // Toggel all lights in room
+  // true or false
+}
 
-    // Make a request for a user with a given ID
-    axios.get('http://localhost:8080')
-        .then(function (response) {
-            // handle success
-            console.log(response)
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-        .then(function () {
-            // always executed
-        });
+export const toggelLightInRom = (id, bool) => {
+  // toggel one light in a room
+}
+
+export const adjustBrightnessInRoom = (id, procent) => {
+  // adjust brigthness in room per %
+}
+
+export const adjustLigthBrigthness = (id, procent) => {
+  // adjust single light 
 }
