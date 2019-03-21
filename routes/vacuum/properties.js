@@ -1,9 +1,4 @@
 module.exports = (server, vacuum) => {
-  server.get('/things/vacuum/properties/state', async (req, res, next) => {
-    let result = await vacuum.getState()
-    res.send(result)
-    next()
-  })
   server.get('/things/vacuum/properties/battery', async (req, res, next) => {
     let level = await vacuum.batteryLevel()
     console.log(level)

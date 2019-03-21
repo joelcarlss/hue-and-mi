@@ -35,13 +35,26 @@ class Vacuum {
     const isCleaning = await this.device.cleaning()
     return isCleaning
   }
+  async getCleaningHistory () {
+    const result = await this.device.getHistory(0)
+    return result
+  }
   async clean () {
     const result = await this.device.clean()
     return result
   }
-  async dock () {
-    const result = await this.device.dock() // This doesnt work
+  async stop () {
+    const result = await this.device.stop()
     return result
+  }
+  async dock () {
+    this.device.call('app_stop', [])
+    .then(console.log)
+    .then(() => this.device.call('app_charge', [], {
+      refresh: [ 'state' ],
+      refreshDelay: 1000
+    }))
+    .then(console.log)
   }
 }
 

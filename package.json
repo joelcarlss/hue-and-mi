@@ -16,8 +16,10 @@
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "miio": "^0.15.6",
+    "mysql2": "^1.6.5",
     "node-hue-api": "^2.4.4",
     "nodemon": "^1.18.10",
-    "restify": "^8.0.0"
+    "restify": "^8.0.0",
+    "sequelize": "^5.1.0"
   }
 }
