@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import '../../App.css'
 import { Modal, Icon, Slider } from 'antd';
-import { toggelLightInRoom, getLampState } from '../../actions/lightsActions'
+import { toggelLightInRoom, getLampState, adjustLigthBrigthness } from '../../actions/lightsActions'
 import '../../App.css'
 class ModalRoom extends Component {
 
-    state = { visible: false, disabled: false, }
+    state = { visible: false, disabled: false }
 
     showModal = () => {
         this.setState({
@@ -26,7 +26,6 @@ class ModalRoom extends Component {
     }
 
 
-
     handleDisabledChange = (disabled) => {
         this.setState({ disabled });
     }
@@ -35,26 +34,37 @@ class ModalRoom extends Component {
         return `Lights in ${room}`
     }
 
-    toggelLight = (id) => {
-        toggelLightInRoom(id)
+    toggelLight = async (id) => {
+        let lampState = await getLampState(id)
+
+        if (lampState.state.on) {
+            toggelLightInRoom(id, false)
+            this.setState({ toggel: true })
+        } else if (!lampState.state.on) {
+            toggelLightInRoom(id, true)
+        }
     }
+
+    adjustLight = (e, lightID) => {
+        adjustLigthBrigthness(e, lightID)
+    }
+
+
 
     renderLights = (lights, disabled) => {
 
 
-        let lightsList = lights[0].map(light => {
-            return <div>
+        let lightsList = lights[0].map(lightID => {
+            return <div key={lightID}>
                 <div className="textbox">
-                    <div onClick={() => this.toggelLight(light)} className="alignleft" >
+                    <div onClick={() => this.toggelLight(lightID)} className="alignleft" >
                         <Icon type="bulb" text="Turn on" /> Turn on
         </div>
                     <div className="middle">
-                        <Slider defaultValue={30} disabled={disabled} />
+                        <Slider onChange={(e) => this.adjustLight(e, lightID)} defaultValue={30} disabled={disabled} />
                     </div>
                     <div className="alignright" >
-                        Light ID : {light}
-
-                        {getLampState(light)}
+                        Light ID : {lightID}
                     </div>
                 </div>
             </div>
@@ -62,6 +72,7 @@ class ModalRoom extends Component {
 
         return lightsList
     }
+
 
     render() {
         const { disabled } = this.state;
@@ -80,9 +91,8 @@ class ModalRoom extends Component {
                     width={700}
                 >
                     {this.renderLights(this.props.lightsInRoom, disabled)}
-
                 </Modal>
-            </div >
+            </div>
         )
     }
 }

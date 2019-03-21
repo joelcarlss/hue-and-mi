@@ -19,6 +19,8 @@ module.exports = (server, hue) => {
     let result
     try {
       result = await hue.getRooms()
+
+      console.log(result)
       result = result.map((room) => ({id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class, state: room.state, action: room.action}))
     } catch (e) {
       result = utils.handleError(e)

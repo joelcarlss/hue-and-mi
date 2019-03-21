@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { List, Icon } from 'antd'
 import { getRooms } from '../../actions/fetchRooms'
+import { toggelAllLightsInRoom, getRoomState } from '../../actions/lightsActions'
 import LightsInRoomModal from '../LightsInRoomModal/LightsInRoomModal'
 import BrigthnessModal from '../BrigthnessModal/BrigthnessModal'
 import '../../App.css'
@@ -20,6 +21,7 @@ class CardProfle extends Component {
     let roomsList = []
     rooms.forEach(element => {
       roomsList.push({
+        id: `${element.id}`,
         title: `${element.name}`,
         lights: `${element.lights.length}`,
         lightInRoom: [element.lights]
@@ -29,6 +31,15 @@ class CardProfle extends Component {
     return roomsList
   }
 
+  toggelAllLightsInRoom = async (id) => {
+    let roomState = await getRoomState(id)
+
+    if (roomState.lastAction.on) {
+      toggelAllLightsInRoom(id, false)
+    } else if (!roomState.lastAction.on) {
+      toggelAllLightsInRoom(id, true)
+    }
+  }
 
   render() {
 
@@ -49,7 +60,7 @@ class CardProfle extends Component {
           <List.Item
             key={item.title}
             extra={item.title}
-            actions={[<LightsInRoomModal roomName={item.title} lightsInRoom={item.lightInRoom} />, <IconText type='api' text='Turn on' />, <IconText type='bulb' text={item.lights} />, <BrigthnessModal roomName={item.title} />]}
+            actions={[<LightsInRoomModal roomName={item.title} lightsInRoom={item.lightInRoom} />, <div onClick={() => this.toggelAllLightsInRoom(item.id)} ><IconText type='api' text='Turn on' /></div>, <IconText type='bulb' text={item.lights} />, <BrigthnessModal roomID={item.id} roomName={item.title} />]}
           >
             <div className='roomsCard'> <p className='roomText'>{item.title}</p></div>
           </List.Item>

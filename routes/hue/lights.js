@@ -60,10 +60,8 @@ module.exports = (server, hue) => {
   server.put('/things/hue/lights/:id/actions/state', async (req, res, next) => {
     let result
     try {
-      console.log(req.params.id)
 
       let id = req.params.id
-      console.log(req.body.state)
 
       let state = JSON.parse(req.body.state)
       result = await hue.setLightState(id, state)
