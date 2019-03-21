@@ -6,7 +6,7 @@ module.exports = (server, hue) => {
     next()
   })
 
-  server.get('/things/hue/lights/model', async (req, res, next) => {
+  server.get('/things/hue/lights/things', async (req, res, next) => {
     let result
     try {
       result = await hue.getLights()
