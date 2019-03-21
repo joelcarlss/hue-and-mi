@@ -4,11 +4,13 @@ const restify = require('restify')
 const bodyParser = require('body-parser')
 const Hue = require('./model/Hue')
 
+const database = require('./model/database')
 const Vaccum = require('./model/Vacuum')
 const Local = require('./model/Local')
 const cors = require('cors')
 const vacuum = new Vaccum()
 
+database.asd()
 // vacuum.connect().then(console.log)
 
 const hue = new Hue()
