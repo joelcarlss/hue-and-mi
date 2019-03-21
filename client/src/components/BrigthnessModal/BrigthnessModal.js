@@ -49,7 +49,7 @@ class ModalRoom extends Component {
                 </div>
 
                 <Modal
-                    title="Adjust brightness in room-name"
+                    title={`Adjust brightness in ${this.props.roomName}`}
                     visible={this.state.visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}

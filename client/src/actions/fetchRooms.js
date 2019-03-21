@@ -1,20 +1,15 @@
 const axios = require('axios')
 
-export const getRooms = (value) => {
-    axios.get('things/hue/model')
-        .then(function (response) {
-            // handle success
-            console.log(response.data)
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error)
-        })
-        .then(function () {
-            // always executed
-        })
+export const getRooms = async (value) => {
+  try {
+    let { data } = await axios.get('things/hue/rooms')
+
+    return data
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 export const getSingleRoom = (id) => {
-    // return single room 
+  // return single room
 }

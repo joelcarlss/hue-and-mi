@@ -10,9 +10,9 @@ module.exports = (server, hue) => {
     let result
     try {
       result = await hue.getSensors()
-      result = result.map(({id, type, name, modelid, manufacturername, productname, swversion, config}) => (
-          {name, type, id, modelid, manufacturername, productname, swversion, config})
-          )
+      result = result.map(({ id, type, name, modelid, manufacturername, productname, swversion, config }) => (
+        { name, type, id, modelid, manufacturername, productname, swversion, config })
+      )
     } catch (e) {
       result = utils.handleError(e)
     }
@@ -37,7 +37,7 @@ module.exports = (server, hue) => {
     try {
       let id = req.params.id
       result = await hue.getSensorById(id)
-      .then(({name, type, modelid, manufacturername, productname, swversion}) => ({name, type, modelid, manufacturername, productname, swversion}))
+        .then(({ name, type, modelid, manufacturername, productname, swversion }) => ({ name, type, modelid, manufacturername, productname, swversion }))
     } catch (e) {
       result = utils.handleError(e)
     }
@@ -50,9 +50,9 @@ module.exports = (server, hue) => {
     let result
     try {
       result = await hue.getSensors()
-      result = result.map(({id, type, name, modelid, manufacturername, productname, swversion, config}) => (
-          {name, type, id, modelid, manufacturername, productname, swversion, config})
-          )
+      result = result.map(({ id, type, name, modelid, manufacturername, productname, swversion, config }) => (
+        { name, type, id, modelid, manufacturername, productname, swversion, config })
+      )
     } catch (e) {
       result = utils.handleError(e)
     }

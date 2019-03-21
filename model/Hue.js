@@ -59,7 +59,7 @@ class Hue {
 
   // Returns all lights
   async getLights () {
-    let {lights} = await this.api.lights()
+    let { lights } = await this.api.lights()
     return lights
   }
 
@@ -176,7 +176,7 @@ class Hue {
 
   async getSensorById (searchId) {
     let result = await this.getSensors()
-    let array = result.filter(({id}) => (id === searchId))
+    let array = result.filter(({ id }) => (id === searchId))
     if (array.length > 0) {
       return array[0]
     } else {

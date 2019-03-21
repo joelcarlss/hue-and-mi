@@ -1,22 +1,12 @@
 const utils = require('../../utils/hue')
 module.exports = (server, hue) => {
-    // ROOMS
+  // ROOMS
+
   server.get('/things/hue/rooms', async (req, res, next) => {
     let result
     try {
-
-    } catch (e) {
-      result = utils.handleError(e)
-    }
-    res.send(result)
-    next()
-  })
-
-  server.get('/things/hue/rooms/model', async (req, res, next) => {
-    let result
-    try {
       result = await hue.getRooms()
-      result = result.map((room) => ({id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class}))
+      result = result.map((room) => ({ id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class }))
     } catch (e) {
       result = utils.handleError(e)
     }
@@ -43,7 +33,7 @@ module.exports = (server, hue) => {
     try {
       let id = req.params.id
       result = await hue.getRoomById(id)
-      .then((room) => ({id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class}))
+        .then((room) => ({ id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class }))
     } catch (e) {
       result = utils.handleError(e)
     }
@@ -98,7 +88,7 @@ module.exports = (server, hue) => {
     try {
       let id = req.params.id
       result = await hue.getRoomById(id)
-      .then((room) => ({id: room.id, name: room.name, lights: room.lights}))
+        .then((room) => ({ id: room.id, name: room.name, lights: room.lights }))
     } catch (e) {
       result = utils.handleError(e)
     }
