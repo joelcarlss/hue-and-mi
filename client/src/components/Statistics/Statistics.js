@@ -15,8 +15,8 @@ const content = (
   <Row span={24}>
     <Description term='Battery'>Last Clean {' '}</Description>
     <Description term={<Tag color='green'>100%</Tag>}>
-      <a>2017-01-10</a> <br />
-      <a>20:03:10</a>
+      2017-01-10 <br />
+      20:03:10
     </Description>
   </Row>
 )

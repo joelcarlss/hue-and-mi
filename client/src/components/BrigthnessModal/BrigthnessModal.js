@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../../App.css'
 import { Modal, Icon, Slider } from 'antd';
-import { } from '../../actions/lightsActions'
+import { adjustBrightnessInRoom } from '../../actions/lightsActions'
 import '../../App.css'
 class ModalRoom extends Component {
 
@@ -28,14 +28,14 @@ class ModalRoom extends Component {
         });
     }
 
-    toggelLight = () => {
-    }
-
-
     handleDisabledChange = (disabled) => {
         this.setState({ disabled });
     }
 
+    onChangeSlider = (e, roomID) => {
+        adjustBrightnessInRoom(e, roomID)
+
+    }
 
     render() {
 
@@ -56,7 +56,7 @@ class ModalRoom extends Component {
                 >
                     <div className="textbox">
                         <div className="middle">
-                            <Slider defaultValue={30} disabled={disabled} />
+                            <Slider onChange={(e) => this.onChangeSlider(e, this.props.roomID)} defaultValue={30} disabled={disabled} />
                         </div>
                     </div>
                 </Modal>

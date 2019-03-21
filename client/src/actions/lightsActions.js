@@ -1,39 +1,99 @@
 const axios = require('axios')
 
+/* 
+  Toggel all ligths in room by ID
+*/
+
 export const toggelAllLightsInRoom = (id, bool) => {
-  // Toggel all lights in room
-  // true or false
+  let params = new URLSearchParams()
+
+  params.append('state', bool)
+
+  axios.put(`things/hue/rooms/${id}/actions/state`, params)
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log('an error occurred : ' + error)
+    })
 }
+
+/* 
+  Toggel singel light
+*/
 
 export const toggelLightInRoom = (id, bool) => {
   let params = new URLSearchParams()
 
-  params.append('state', true)
+  params.append('state', bool)
 
-  axios.post(`things/hue/lights/${id}/actions/state`, params)
-    .then(function (response) {
+  axios.put(`things/hue/lights/${id}/actions/state`, params)
+    .then((response) => {
       console.log(response)
     })
-    .catch(function (error) {
-      console.log(error)
+    .catch((error) => {
+      console.log('an error occurred : ' + error)
     })
 }
 
-export const getLampState = (id) => {
+/* 
+  Get single lights properties
+*/
 
-  axios.get(`things/hue/lights/${id}/properties`)
-    .then(function (response) {
-      console.log(response.data)
+export const getLampState = async (id) => {
+  try {
+    let { data } = await axios.get(`things/hue/lights/${id}/properties`)
+    return data
+  } catch (error) {
+  }
+}
+
+/* 
+  Get a single rooms current properties
+*/
+
+export const getRoomState = async (id) => {
+  try {
+    let { data } = await axios.get(`things/hue/rooms/${id}/properties`)
+    return data
+  } catch (error) {
+  }
+}
+
+/* 
+  Adjust all lights brightness in a room
+*/
+
+export const adjustBrightnessInRoom = (procent, roomID) => {
+
+  let params = new URLSearchParams()
+
+  params.append('percentage', procent)
+
+  axios.put(`things/hue/rooms/${roomID}/actions/brightness`, params)
+    .then((response) => {
+      console.log(response)
     })
-    .catch(function (error) {
-      console.log(error)
+    .catch((error) => {
+      console.log('an error occurred : ' + error)
     })
 }
 
-export const adjustBrightnessInRoom = (id, procent) => {
-  // adjust brigthness in room per %
-}
+/* 
+  Adjust single lights brightness
+*/
 
-export const adjustLigthBrigthness = (id, procent) => {
-  // adjust single light
+export const adjustLigthBrigthness = (procent, lightID) => {
+
+  let params = new URLSearchParams()
+
+  params.append('percentage', procent)
+
+  axios.put(`things/hue/lights/${lightID}/actions/brightness`, params)
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log('an error occurred : ' + error)
+    })
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Statistics from '../Statistics/Statistics'
-import { Menu, Icon, Switch } from 'antd';
+import { Menu, Icon } from 'antd';
 import '../../App.css'
 
 const SubMenu = Menu.SubMenu;
