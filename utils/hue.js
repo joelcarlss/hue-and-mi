@@ -25,6 +25,9 @@
     r = r * 255; if (r < 0) { r = 255 };
     g = g * 255; if (g < 0) { g = 255 };
     b = b * 255; if (b < 0) { b = 255 };
+    r = Math.round(r)
+    g = Math.round(g)
+    b = Math.round(b)
     return {
       r: r,
       g: g,
