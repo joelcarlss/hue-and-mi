@@ -1,4 +1,5 @@
 require('dotenv').config()
+var converter = require('@q42philips/hue-color-converter')
 let hue = require('node-hue-api')
 var HueApi = require('node-hue-api').HueApi
 var hueApi = new HueApi()
@@ -83,6 +84,20 @@ class Hue {
     // if (result) {
     //   result = {value: percentage}
     // }
+    return result
+  }
+  async setRgbColor (id, rgb) {
+    let result
+    let {r, g, b} = rgb
+    let light = this.getLightStateById(id)
+    if (light.state.colormode === 'xy') {
+      let xy = converter.calculateXY(r, g, b)
+      let state = hue.lightState.create().xy(xy)
+      result = await this.api.setLightState(id, state)
+    } else {
+      result = 'Not a colorlamp'
+    }
+
     return result
   }
 

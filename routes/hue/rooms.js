@@ -43,7 +43,7 @@ module.exports = (server, hue) => {
     next()
   })
 
-  server.post('/things/hue/rooms/:id/actions/state', async (req, res, next) => {
+  server.put('/things/hue/rooms/:id/actions/state', async (req, res, next) => {
     let result
     try {
       let id = req.params.id
@@ -56,7 +56,7 @@ module.exports = (server, hue) => {
     next()
   })
 
-  server.post('/things/hue/rooms/:id/actions/brightness', async (req, res, next) => {
+  server.put('/things/hue/rooms/:id/actions/brightness', async (req, res, next) => {
     let result
     try {
       let id = req.params.id

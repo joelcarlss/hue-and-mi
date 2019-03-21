@@ -61,7 +61,7 @@ module.exports = (server, hue) => {
     next()
   })
 
-  server.post('/things/hue/lights/:id/actions/state', async (req, res, next) => {
+  server.put('/things/hue/lights/:id/actions/state', async (req, res, next) => {
     let result
     try {
       let id = req.params.id
@@ -74,12 +74,25 @@ module.exports = (server, hue) => {
     next()
   })
 
-  server.post('/things/hue/lights/:id/actions/brightness', async (req, res, next) => {
+  server.put('/things/hue/lights/:id/actions/brightness', async (req, res, next) => {
     let result
     try {
       let id = req.params.id
       let data = JSON.parse(req.body.percentage)
       result = await hue.setBrightness(id, data)
+    } catch (e) {
+      result = utils.handleError(e)
+    }
+    res.send(result)
+    next()
+  })
+  server.put('/things/hue/lights/:id/actions/color', async (req, res, next) => {
+    let result
+    try {
+      let id = req.params.id
+      let {r, g, b} = req.body
+      console.log({r, g, b})
+      result = await hue.setRgbColor(id, {r, g, b})
     } catch (e) {
       result = utils.handleError(e)
     }
