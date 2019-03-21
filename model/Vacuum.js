@@ -13,9 +13,17 @@ class Vacuum {
       console.log(e)
     }
   }
+  async getAbout () {
+    console.log('getAbout')
+    console.log(await this.device.model())
+  }
   async getState () {
-    const result = await this.device.state()
-    return result
+    try {
+      const result = await this.device.state()
+      return result
+    } catch (e) {
+      return e
+    }
   }
   async batteryLevel () {
     if (this.device.matches('cap:battery-level')) {

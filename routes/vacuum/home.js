@@ -4,7 +4,13 @@ module.exports = (server, vacuum) => {
     next()
   })
   server.get('/things/vacuum/model', async (req, res, next) => {
-    res.send('hello')
+    let result
+    try {
+      result = await vacuum.getAbout()
+    } catch (e) {
+      result = e
+    }
+    res.send(result)
     next()
   })
   server.get('/things/vacuum/actions', async (req, res, next) => {

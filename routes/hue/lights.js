@@ -25,10 +25,6 @@ module.exports = (server, hue) => {
 
   // All lights properties
   server.get('/things/hue/lights/properties', async (req, res, next) => {
-    res.send('hello')
-    next()
-  })
-  server.get('/things/hue/lights/properties/states', async (req, res, next) => {
     let result
     try {
       result = await hue.getLights()
@@ -103,11 +99,6 @@ module.exports = (server, hue) => {
 
   // Light by id properties
   server.get('/things/hue/lights/:id/properties', async (req, res, next) => {
-    res.send('Show properties')
-    next()
-  })
-
-  server.get('/things/hue/lights/:id/properties/state', async (req, res, next) => {
     let result = ''
     try {
       let id = req.params.id

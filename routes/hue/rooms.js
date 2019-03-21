@@ -15,11 +15,14 @@ module.exports = (server, hue) => {
   })
 
   server.get('/things/hue/rooms/properties', async (req, res, next) => {
-    res.send('hello')
-    next()
-  })
-  server.get('/things/hue/rooms/properties/states', async (req, res, next) => {
-    res.send('brightness, isOn?')
+    let result
+    try {
+      result = await hue.getRooms()
+      result = result.map((room) => ({id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class, state: room.state, action: room.action}))
+    } catch (e) {
+      result = utils.handleError(e)
+    }
+    res.send(result)
     next()
   })
 
