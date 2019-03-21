@@ -33,7 +33,16 @@ module.exports = (server, hue) => {
 
   // Sensors by id model
   server.get('/things/hue/sensors/:id/model', async (req, res, next) => {
-
+    let result
+    try {
+      let id = req.params.id
+      result = await hue.getSensorById(id)
+      .then(({name, type, modelid, manufacturername, productname, swversion}) => ({name, type, modelid, manufacturername, productname, swversion}))
+    } catch (e) {
+      result = utils.handleError(e)
+    }
+    res.send(result)
+    next()
   })
 
   // Sensors by id properties

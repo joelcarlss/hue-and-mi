@@ -86,6 +86,19 @@ class Hue {
     return result
   }
 
+  // Sensors
+
+  async getMovementSensors () {
+    let arr = []
+    let sensors = await this.getSensors()
+    sensors.forEach(element => {
+      if (element.type === 'ZLLPresence') {
+        arr.push(element)
+      }
+    })
+    return arr
+  }
+
   async getTemperatureSensors () {
     let arr = []
     let sensors = await this.getSensors()
@@ -108,7 +121,7 @@ class Hue {
     return arr
   }
 
-  async getMovementSensors () {
+  async getInteractionSensors () {
     let switches = await this.getSwitches()
     let sensors = await this.getMovementSensors()
     let result = switches.concat(sensors)
@@ -142,16 +155,6 @@ class Hue {
     return arr
   }
 
-  async getMovementSensors () {
-    let arr = []
-    let sensors = await this.getSensors()
-    sensors.forEach(element => {
-      if (element.type === 'ZLLPresence') {
-        arr.push(element)
-      }
-    })
-    return arr
-  }
   async getSensors () {
     let result = await this.api.getSensors()
     let sensors = this.filterSensors(result.sensors)
@@ -169,6 +172,16 @@ class Hue {
       }
     })
     return arr
+  }
+
+  async getSensorById (searchId) {
+    let result = await this.getSensors()
+    let array = result.filter(({id}) => (id === searchId))
+    if (array.length > 0) {
+      return array[0]
+    } else {
+      throw new Error('No match')
+    }
   }
 
   // Rooms
