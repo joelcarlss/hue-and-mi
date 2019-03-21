@@ -123,12 +123,14 @@ class Hue {
     })
     return obj
   }
+
   async getInteractionSensors () {
     let switches = await this.getSwitches()
     let sensors = await this.getMovementSensors()
     let result = switches.concat(sensors)
     return result
   }
+
   async getSwitches () {
     let arr = []
     let sensors = await this.getSensors()
@@ -139,6 +141,7 @@ class Hue {
     })
     return arr
   }
+
   async getMovementSensors () {
     let arr = []
     let sensors = await this.getSensors()
