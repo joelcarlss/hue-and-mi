@@ -2,7 +2,7 @@ const utils = require('../../utils/hue')
 module.exports = (server, hue) => {
 // All Lights
   server.get('/things/hue/lights', async (req, res, next) => {
-    res.send()
+    res.send('HATEOAS HERE?')
     next()
   })
 
@@ -25,10 +25,6 @@ module.exports = (server, hue) => {
 
   // All lights properties
   server.get('/things/hue/lights/properties', async (req, res, next) => {
-    res.send('hello')
-    next()
-  })
-  server.get('/things/hue/lights/properties/states', async (req, res, next) => {
     let result
     try {
       result = await hue.getLights()
@@ -61,7 +57,7 @@ module.exports = (server, hue) => {
     next()
   })
 
-  server.post('/things/hue/lights/:id/actions/state', async (req, res, next) => {
+  server.put('/things/hue/lights/:id/actions/state', async (req, res, next) => {
     let result
     try {
       let id = req.params.id
@@ -74,7 +70,7 @@ module.exports = (server, hue) => {
     next()
   })
 
-  server.post('/things/hue/lights/:id/actions/brightness', async (req, res, next) => {
+  server.put('/things/hue/lights/:id/actions/brightness', async (req, res, next) => {
     let result
     try {
       let id = req.params.id
@@ -86,14 +82,23 @@ module.exports = (server, hue) => {
     res.send(result)
     next()
   })
-
-  // Light by id properties
-  server.get('/things/hue/lights/:id/properties', async (req, res, next) => {
-    res.send('Show properties')
+  server.put('/things/hue/lights/:id/actions/color', async (req, res, next) => {
+    let result
+    try {
+      let id = req.params.id
+      let body = req.body
+      let {r, g, b} = body
+      console.log({r, g, b})
+      result = await hue.setRgbColor(id, {r, g, b})
+    } catch (e) {
+      result = utils.handleError(e)
+    }
+    res.send(result)
     next()
   })
 
-  server.get('/things/hue/lights/:id/properties/state', async (req, res, next) => {
+  // Light by id properties
+  server.get('/things/hue/lights/:id/properties', async (req, res, next) => {
     let result = ''
     try {
       let id = req.params.id

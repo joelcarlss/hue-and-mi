@@ -1,4 +1,6 @@
 require('dotenv').config()
+let utils = require('../utils/hue')
+let converter = require('@q42philips/hue-color-converter')
 let hue = require('node-hue-api')
 var HueApi = require('node-hue-api').HueApi
 var hueApi = new HueApi()
@@ -60,13 +62,25 @@ class Hue {
   // Returns all lights
   async getLights () {
     let {lights} = await this.api.lights()
+    lights.forEach(light => {
+      if (light.state.colormode === 'xy') {
+        let x = light.state.xy[0]
+        let y = light.state.xy[1]
+        let bri = light.state.bri
+        light.state.rgb = utils.xyBriToRgb(x, y, bri)
+      }
+    })
     return lights
   }
 
   // Single Light
   async getLightStateById (id) {
-    let result = await this.api.lightStatus(id)
-    return result
+    let light = await this.api.lightStatus(id)
+    let x = light.state.xy[0]
+    let y = light.state.xy[1]
+    let bri = light.state.bri
+    light.state.rgb = utils.xyBriToRgb(x, y, bri)
+    return light
   }
 
   async setLightState (id, bool) {
@@ -83,6 +97,21 @@ class Hue {
     // if (result) {
     //   result = {value: percentage}
     // }
+    return result
+  }
+  async setRgbColor (id, rgb) {
+    let result
+    let {r, g, b} = rgb
+    let light = await this.getLightStateById(id)
+    if (light.state.colormode === 'xy') {
+      let xy = converter.calculateXY(r, g, b)
+      console.log(xy)
+      let state = hue.lightState.create().xy(xy)
+      result = await this.api.setLightState(id, state)
+    } else {
+      result = 'Not a colorlamp'
+    }
+
     return result
   }
 
@@ -198,6 +227,11 @@ class Hue {
   async setRoomStateById (id, bool) {
     let createState = hue.lightState.create()
     let state = bool ? createState.turnOn() : createState.turnOff()
+    let result = await this.api.setGroupLightState(id, state)
+    return result
+  }
+  async setRoomBrightnessById (id, percentage) {
+    let state = hue.lightState.create().brightness(percentage)
     let result = await this.api.setGroupLightState(id, state)
     return result
   }
