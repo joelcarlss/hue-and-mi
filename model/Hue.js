@@ -80,9 +80,9 @@ class Hue {
   async setBrightness (id, percentage) {
     let state = hue.lightState.create().brightness(percentage)
     let result = await this.api.setLightState(id, state)
-    if (result) {
-      result = {value: percentage}
-    }
+    // if (result) {
+    //   result = {value: percentage}
+    // }
     return result
   }
 

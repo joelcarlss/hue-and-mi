@@ -81,6 +81,17 @@ module.exports = (server, hue) => {
     res.send(result)
     next()
   })
+  server.get('/things/hue/rooms/:id/properties/state', async (req, res, next) => {
+    let result
+    try {
+      let id = req.params.id
+      result = await hue.getRoomById(id)
+    } catch (e) {
+      result = utils.handleError(e)
+    }
+    res.send(result)
+    next()
+  })
   // Rooms by id things
   server.get('/things/hue/rooms/:id/lights', async (req, res, next) => {
     let result
