@@ -62,6 +62,14 @@ class Hue {
   // Returns all lights
   async getLights () {
     let {lights} = await this.api.lights()
+    lights.forEach(light => {
+      if (light.state.colormode === 'xy') {
+        let x = light.state.xy[0]
+        let y = light.state.xy[1]
+        let bri = light.state.bri
+        light.state.rgb = utils.xyBriToRgb(x, y, bri)
+      }
+    })
     return lights
   }
 
