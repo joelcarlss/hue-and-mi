@@ -9,12 +9,14 @@ module.exports = (server) => {
     res.send(JSON.stringify(result))
     next()
   })
+
   server.get('/vacuum/battery', async (req, res, next) => {
     let level = await vacuum.batteryLevel()
     console.log(level)
     res.send(JSON.stringify(level))
     next()
   })
+
   server.get('/vacuum/clean', async (req, res, next) => {
     try {
       let result = await vacuum.isCleaning()
@@ -25,6 +27,7 @@ module.exports = (server) => {
     }
     next()
   })
+
   server.post('/vacuum/clean', async (req, res, next) => {
     try {
       let result = await vacuum.clean()
@@ -36,6 +39,7 @@ module.exports = (server) => {
     }
     next()
   })
+
   server.del('/vacuum/clean', async (req, res, next) => {
     try {
       let result = await vacuum.dock()

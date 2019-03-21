@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 
 var server = restify.createServer()
 
-server.use(bodyParser.urlencoded({extended: true}))
+server.use(bodyParser.urlencoded({ extended: true }))
 // server.use(jwt({ secret: process.env.SECRET }).unless({path: ['/', '/auth', '/user']}))
 
 require('./routes/home')(server)
