@@ -5,16 +5,17 @@ exports.asd = () => {
   console.log(new Date(0, 0, 0, 12))
 }
 exports.createEvent = (name, fromHour, toHour, daysSinceLast) => {
-  const Event = sequelize.define('event', {
-    name: Sequelize.STRING
+  const User = sequelize.define('user', {
+    username: Sequelize.STRING
   })
 
-  return sequelize.sync()
-    .then(() => Event.create({
-      name: name
+  sequelize.sync()
+    .then(() => User.create({
+      username: 'janedoe'
     }))
-    .then(result => result.toJSON())
-    .catch(console.log)
+    .then(jane => {
+      console.log(jane.toJSON())
+    })
 }
 
 // exports.createEvent = (name, fromHour, toHour, daysSinceLast) => {
