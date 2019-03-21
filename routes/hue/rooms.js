@@ -1,12 +1,13 @@
 const utils = require('../../utils/hue')
 module.exports = (server, hue) => {
-  // ROOMS
+
+    // ROOMS
 
   server.get('/things/hue/rooms', async (req, res, next) => {
     let result
     try {
       result = await hue.getRooms()
-      result = result.map((room) => ({ id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class }))
+      result = result.map((room) => ({id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class}))
     } catch (e) {
       result = utils.handleError(e)
     }
@@ -14,16 +15,15 @@ module.exports = (server, hue) => {
     next()
   })
 
-  server.get('/things/hue/rooms/actions', async (req, res, next) => {
-    res.send('hello')
-    next()
-  })
   server.get('/things/hue/rooms/properties', async (req, res, next) => {
-    res.send('hello')
-    next()
-  })
-  server.get('/things/hue/rooms/properties/states', async (req, res, next) => {
-    res.send('hello')
+    let result
+    try {
+      result = await hue.getRooms()
+      result = result.map((room) => ({id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class, state: room.state, action: room.action}))
+    } catch (e) {
+      result = utils.handleError(e)
+    }
+    res.send(result)
     next()
   })
 
@@ -47,7 +47,7 @@ module.exports = (server, hue) => {
     next()
   })
 
-  server.post('/things/hue/rooms/:id/actions/state', async (req, res, next) => {
+  server.put('/things/hue/rooms/:id/actions/state', async (req, res, next) => {
     let result
     try {
       let id = req.params.id
@@ -59,6 +59,20 @@ module.exports = (server, hue) => {
     res.send(result)
     next()
   })
+
+  server.put('/things/hue/rooms/:id/actions/brightness', async (req, res, next) => {
+    let result
+    try {
+      let id = req.params.id
+      let data = JSON.parse(req.body.percentage)
+      result = await hue.setRoomBrightnessById(id, data)
+    } catch (e) {
+      result = utils.handleError(e)
+    }
+    res.send(result)
+    next()
+  })
+
   // Rooms by id properties
   server.get('/things/hue/rooms/:id/properties', async (req, res, next) => {
     let result
