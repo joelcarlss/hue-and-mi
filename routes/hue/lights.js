@@ -16,7 +16,7 @@ module.exports = (server, hue) => {
     try {
       let lightState = JSON.parse(req.body.lightState)
       if (lightState) {
-        result = 'I SHOULD CHANGE CTATE ON ALL TODO:'
+        result = 'TODO: I SHOULD CHANGE STATE ON ALL'
       }
     } catch (e) {
       result = utils.handleError(e)
@@ -66,7 +66,6 @@ module.exports = (server, hue) => {
       let lightState = req.body.lightState
       let brightness = req.body.brightness
       let color = req.body.color
-      // console.log(req.body)
       if (lightState) {
         lightState = JSON.parse(lightState)
         result = await hue.setLightState(id, lightState)
@@ -80,6 +79,7 @@ module.exports = (server, hue) => {
         let {r, g, b} = color
         result = await hue.setRgbColor(id, {r, g, b})
       }
+      result = await hue.getLightStateById(id)
     } catch (e) {
       result = utils.handleError(e)
     }

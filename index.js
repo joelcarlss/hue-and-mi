@@ -10,7 +10,7 @@ const Local = require('./model/Local')
 const cors = require('cors')
 const vacuum = new Vaccum()
 
-database.asd()
+// database.getEvents()
 // vacuum.connect().then(console.log)
 
 const hue = new Hue()
