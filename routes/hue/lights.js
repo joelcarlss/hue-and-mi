@@ -60,38 +60,20 @@ module.exports = (server, hue) => {
   server.put('/things/hue/lights/:id/actions/state', async (req, res, next) => {
     let result
     try {
-
       let id = req.params.id
-
-      let state = JSON.parse(req.body.state)
-      result = await hue.setLightState(id, state)
-    } catch (e) {
-      result = utils.handleError(e)
-    }
-    res.send(result)
-    next()
-  })
-
-  server.put('/things/hue/lights/:id/actions/brightness', async (req, res, next) => {
-    let result
-    try {
-      let id = req.params.id
-      let data = JSON.parse(req.body.percentage)
-      result = await hue.setBrightness(id, data)
-    } catch (e) {
-      result = utils.handleError(e)
-    }
-    res.send(result)
-    next()
-  })
-  server.put('/things/hue/lights/:id/actions/color', async (req, res, next) => {
-    let result
-    try {
-      let id = req.params.id
-      let body = req.body
-      let {r, g, b} = body
-      console.log({r, g, b})
-      result = await hue.setRgbColor(id, {r, g, b})
+      let lightState = JSON.parse(req.body.lightState)
+      let brightness = JSON.parse(req.body.brightness)
+      let color = JSON.parse(req.body.color)
+      if (lightState) {
+        result = await hue.setLightState(id, lightState)
+      }
+      if (brightness) {
+        result = await hue.setBrightness(id, brightness)
+      }
+      if (color) {
+        let {r, g, b} = color
+        result = await hue.setRgbColor(id, {r, g, b})
+      }
     } catch (e) {
       result = utils.handleError(e)
     }
