@@ -51,18 +51,22 @@ module.exports = (server, hue) => {
     let result
     try {
       let id = req.params.id
-      let lightState = JSON.parse(req.body.lightState)
-      let brightness = JSON.parse(req.body.brightness)
-      let color = JSON.parse(req.body.color)
+      let lightState = req.body.lightState
+      let brightness = req.body.brightness
+      let color = req.body.color
       if (lightState) {
+        lightState = JSON.parse(lightState)
         result = await hue.setRoomStateById(id, lightState)
       }
       if (brightness) {
+        brightness = JSON.parse(brightness)
         result = await hue.setRoomBrightnessById(id, brightness)
       }
       if (color) {
+        color = JSON.parse(color)
         result = await hue.setRoomColorById(id, color)
       }
+      result = await hue.getRoomById(id)
     } catch (e) {
       result = utils.handleError(e)
     }
@@ -72,17 +76,6 @@ module.exports = (server, hue) => {
 
   // Rooms by id properties
   server.get('/things/hue/rooms/:id/properties', async (req, res, next) => {
-    let result
-    try {
-      let id = req.params.id
-      result = await hue.getRoomById(id)
-    } catch (e) {
-      result = utils.handleError(e)
-    }
-    res.send(result)
-    next()
-  })
-  server.get('/things/hue/rooms/:id/properties/state', async (req, res, next) => {
     let result
     try {
       let id = req.params.id
