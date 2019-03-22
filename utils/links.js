@@ -1,12 +1,14 @@
 const getLinks = (url) => {
   const hue = {
-    model: {},
-    actions: {},
+    model: {
+      link: url + '/things/hue/model',
+      method: 'GET'
+    },
+    actions: {
+    },
     properties: {},
-    things: {
-      vacuum: {},
-      hue: {}
-    }
+    lights: {},
+    rooms: {}
   }
 
   const vacuum = {
@@ -26,10 +28,21 @@ const getLinks = (url) => {
         }
       }
     },
-    properties: {},
-    things: {
-      vacuum: {},
-      hue: {}
+    properties: {
+      link: url + '/things/vacuum/properties',
+      method: 'GET',
+      battery: {
+        link: url + '/things/vacuum/properties/battery',
+        method: 'GET'
+      },
+      cleaning: {
+        link: url + '/things/vacuum/properties/cleaning',
+        method: 'GET'
+      },
+      charging: {
+        link: url + '/things/vacuum/properties/charging',
+        method: 'GET'
+      }
     }
   }
 
