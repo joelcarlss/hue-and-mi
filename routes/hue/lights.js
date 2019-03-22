@@ -5,21 +5,23 @@ module.exports = (server, hue) => {
     res.send('HATEOAS HERE?')
     next()
   })
+  // All lights actions
+  server.get('/things/hue/lights/actions', async (req, res, next) => {
+    res.send('hello')
+    next()
+  })
 
-  server.get('/things/hue/lights/things', async (req, res, next) => {
+  server.put('/things/hue/lights/actions/state', async (req, res, next) => {
     let result
     try {
-      result = await hue.getLights()
-      result = result.map(({ id, type, name, modelid, manufacturername, productname, productid }) => ({ name, type, id, modelid, manufacturername, productname, productid }))
+      let lightState = JSON.parse(req.body.lightState)
+      if (lightState) {
+        result = 'I SHOULD CHANGE CTATE ON ALL TODO:'
+      }
     } catch (e) {
       result = utils.handleError(e)
     }
     res.send(result)
-    next()
-  })
-  // All lights actions
-  server.get('/things/hue/lights/actions', async (req, res, next) => {
-    res.send('hello')
     next()
   })
 
