@@ -16,7 +16,7 @@ module.exports = (server, hue) => {
     try {
       let lightState = JSON.parse(req.body.lightState)
       if (lightState) {
-        result = 'I SHOULD CHANGE CTATE ON ALL TODO:'
+        result = 'TODO: I SHOULD CHANGE STATE ON ALL'
       }
     } catch (e) {
       result = utils.handleError(e)
