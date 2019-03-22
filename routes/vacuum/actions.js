@@ -2,18 +2,29 @@ module.exports = (server, vacuum) => {
   server.put('/things/vacuum/actions/state', async (req, res, next) => {
     let result
     try {
-      let clean = req.body.clean
-      let dock = req.body.dock
-      console.log(clean)
+      let cleanState = req.body.cleanState
+      let dockState = req.body.dockState
       // let result = await vacuum.clean()
-      if (clean === false) {
-        result = await vacuum.stop()
+      if (cleanState) {
+        cleanState = JSON.parse(cleanState)
+        if (cleanState === false) {
+          console.log('hej')
+          result = await vacuum.stop()
+        }
+        if (cleanState === true) {
+          console.log('asd')
+          result = await vacuum.clean()
+        // Returns Error
+        }
       }
-      if (clean) {
-        result = await vacuum.clean()
+      if (dockState) {
+        dockState = JSON.parse(dockState)
+        if (dockState === true) {
+          result = await vacuum.dock()
+        }
       }
-      if (dock) {
-        result = await vacuum.dock()
+      if (result) {
+        result = await vacuum.getState()
       }
       console.log(result)
       res.send(result)

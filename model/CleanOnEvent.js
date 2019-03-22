@@ -1,9 +1,13 @@
 class CleanOnEvent {
-  constructor () {
-    this.between = ['0900', '1500']
+  constructor (name, fromHour, toHour, daysSinceLast) {
+    this.name = name
+    this.fromHour = fromHour
+    this.toHour = toHour
+    this.daysSinceLast = daysSinceLast
+    this.runEvent()
   }
-  set () {
-    console.log('hej')
+  runEvent () {
+    console.log(this.name)
   }
 }
 

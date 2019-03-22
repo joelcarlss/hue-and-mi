@@ -1,5 +1,6 @@
 require('dotenv').config()
 let miio = require('miio')
+let utils = require('../utils/vacuum')
 
 class Vacuum {
   constructor () {
@@ -40,11 +41,16 @@ class Vacuum {
     return result
   }
   async clean () {
-    const result = await this.device.clean()
+    const result = await this.device.call('app_start', [], {
+      refresh: [ 'state' ],
+      refreshDelay: 1000
+    }).then(result => utils.checkValue(result))
     return result
   }
   async stop () {
-    const result = await this.device.stop()
+    const result = await this.device.call('app_stop', [], {
+      refresh: [ 'state' ]
+    }).then(result => utils.checkValue(result))
     return result
   }
   async dock () {
@@ -54,7 +60,7 @@ class Vacuum {
         refresh: [ 'state' ],
         refreshDelay: 1000
       }))
-      .then(console.log)
+      .then(result => utils.checkValue(result))
   }
 }
 

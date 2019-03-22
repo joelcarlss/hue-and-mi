@@ -12,6 +12,11 @@ module.exports = (server, local) => {
     res.send('Here one can do things like set events')
     next()
   })
+  server.get('/actions/autoClean', async (req, res, next) => {
+    let event = await db.getEvents()
+    res.send(event)
+    next()
+  })
   server.post('/actions/autoClean', async (req, res, next) => {
     let name = req.body.name
     let fromHour = JSON.parse(req.body.fromHour)

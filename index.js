@@ -4,7 +4,7 @@ const restify = require('restify')
 const bodyParser = require('body-parser')
 const Hue = require('./model/Hue')
 
-const database = require('./model/database')
+const EventHandler = require('./model/EventHandler')
 const Vaccum = require('./model/Vacuum')
 const Local = require('./model/Local')
 const cors = require('cors')
@@ -19,7 +19,8 @@ hue.connect()
 const local = new Local()
 
 async function test () {
-  // console.log(await hue.getLights())
+  const eventHandler = new EventHandler()
+  eventHandler.start()
 }
 var server = restify.createServer()
 server.use(cors())
