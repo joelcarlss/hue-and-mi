@@ -14,10 +14,3 @@ export const getRooms = async (value) => {
   }
 }
 
-/*
-  Fetch singel room
-*/
-
-export const getSingleRoom = (id) => {
-  // return single room
-}

@@ -7,7 +7,7 @@ const axios = require('axios')
 export const toggelAllLightsInRoom = (id, bool) => {
   let params = new URLSearchParams()
 
-  params.append('state', bool)
+  params.append('lightState', bool)
 
   axios.put(`things/hue/rooms/${id}/actions/state`, params)
     .then((response) => {

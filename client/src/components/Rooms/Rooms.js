@@ -7,7 +7,7 @@ import BrigthnessModal from '../BrigthnessModal/BrigthnessModal'
 import '../../App.css'
 
 class CardProfle extends Component {
-  
+
   state = {
     rooms: []
   }
@@ -33,6 +33,8 @@ class CardProfle extends Component {
 
   toggelAllLightsInRoom = async (id) => {
     let roomState = await getRoomState(id)
+    console.log(roomState)
+    console.log(this.state.rooms)
     if (roomState.lastAction.on) {
       toggelAllLightsInRoom(id, false)
     } else if (!roomState.lastAction.on) {

@@ -15,11 +15,3 @@ export const geAllLights = (value) => {
     .then(() => {
     })
 }
-
-/*
-  Fetch singel light
-*/
-
-export const getSingleLight = (id) => {
-  // return single room
-}
