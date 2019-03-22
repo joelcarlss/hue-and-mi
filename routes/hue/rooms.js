@@ -1,13 +1,12 @@
 const utils = require('../../utils/hue')
 module.exports = (server, hue) => {
-
-    // ROOMS
+  // ROOMS
 
   server.get('/things/hue/rooms', async (req, res, next) => {
     let result
     try {
       result = await hue.getRooms()
-      result = result.map((room) => ({id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class}))
+      result = result.map((room) => ({ id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class }))
     } catch (e) {
       result = utils.handleError(e)
     }
@@ -21,7 +20,7 @@ module.exports = (server, hue) => {
       result = await hue.getRooms()
 
       console.log(result)
-      result = result.map((room) => ({id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class, state: room.state, action: room.action}))
+      result = result.map((room) => ({ id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class, state: room.state, action: room.action }))
     } catch (e) {
       result = utils.handleError(e)
     }

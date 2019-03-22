@@ -60,7 +60,6 @@ module.exports = (server, hue) => {
   server.put('/things/hue/lights/:id/actions/state', async (req, res, next) => {
     let result
     try {
-
       let id = req.params.id
 
       let state = JSON.parse(req.body.state)
@@ -89,9 +88,9 @@ module.exports = (server, hue) => {
     try {
       let id = req.params.id
       let body = req.body
-      let {r, g, b} = body
-      console.log({r, g, b})
-      result = await hue.setRgbColor(id, {r, g, b})
+      let { r, g, b } = body
+      console.log({ r, g, b })
+      result = await hue.setRgbColor(id, { r, g, b })
     } catch (e) {
       result = utils.handleError(e)
     }

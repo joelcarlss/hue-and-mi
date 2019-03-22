@@ -7,7 +7,7 @@ import BrigthnessModal from '../BrigthnessModal/BrigthnessModal'
 import '../../App.css'
 
 class CardProfle extends Component {
-
+  
   state = {
     rooms: []
   }
@@ -33,7 +33,6 @@ class CardProfle extends Component {
 
   toggelAllLightsInRoom = async (id) => {
     let roomState = await getRoomState(id)
-
     if (roomState.lastAction.on) {
       toggelAllLightsInRoom(id, false)
     } else if (!roomState.lastAction.on) {
@@ -60,7 +59,11 @@ class CardProfle extends Component {
           <List.Item
             key={item.title}
             extra={item.title}
-            actions={[<LightsInRoomModal roomName={item.title} lightsInRoom={item.lightInRoom} />, <div onClick={() => this.toggelAllLightsInRoom(item.id)} ><IconText type='api' text='Turn on' /></div>, <IconText type='bulb' text={item.lights} />, <BrigthnessModal roomID={item.id} roomName={item.title} />]}
+            actions={[
+              <LightsInRoomModal roomName={item.title} lightsInRoom={item.lightInRoom} />,
+              <div onClick={() => this.toggelAllLightsInRoom(item.id)} ><IconText type='api' text='Turn on' /></div>,
+              <IconText type='bulb' text={item.lights} />,
+              <BrigthnessModal roomID={item.id} roomName={item.title} />]}
           >
             <div className='roomsCard'> <p className='roomText'>{item.title}</p></div>
           </List.Item>
@@ -69,8 +72,5 @@ class CardProfle extends Component {
     )
   }
 }
-
-
-
 
 export default CardProfle

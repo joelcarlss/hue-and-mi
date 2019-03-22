@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-/* 
+/*
   Fetch all rooms
 */
 
@@ -14,7 +14,7 @@ export const getRooms = async (value) => {
   }
 }
 
-/* 
+/*
   Fetch singel room
 */
 
