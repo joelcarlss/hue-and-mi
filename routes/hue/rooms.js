@@ -1,12 +1,11 @@
 const utils = require('../../utils/hue')
 module.exports = (server, hue) => {
-  // ROOMS
+    // ROOMS
 
   server.get('/things/hue/rooms', async (req, res, next) => {
     let result
     try {
-      result = await hue.getRooms()
-      result = result.map((room) => ({ id: room.id, name: room.name, lights: room.lights, sensors: room.sensors, class: room.class }))
+      result = 'hateoas here'
     } catch (e) {
       result = utils.handleError(e)
     }
@@ -52,21 +51,18 @@ module.exports = (server, hue) => {
     let result
     try {
       let id = req.params.id
-      let state = JSON.parse(req.body.state)
-      result = await hue.setRoomStateById(id, state)
-    } catch (e) {
-      result = utils.handleError(e)
-    }
-    res.send(result)
-    next()
-  })
-
-  server.put('/things/hue/rooms/:id/actions/brightness', async (req, res, next) => {
-    let result
-    try {
-      let id = req.params.id
-      let data = JSON.parse(req.body.percentage)
-      result = await hue.setRoomBrightnessById(id, data)
+      let lightState = JSON.parse(req.body.lightState)
+      let brightness = JSON.parse(req.body.brightness)
+      let color = JSON.parse(req.body.color)
+      if (lightState) {
+        result = await hue.setRoomStateById(id, lightState)
+      }
+      if (brightness) {
+        result = await hue.setRoomBrightnessById(id, brightness)
+      }
+      if (color) {
+        result = await hue.setRoomColorById(id, color)
+      }
     } catch (e) {
       result = utils.handleError(e)
     }

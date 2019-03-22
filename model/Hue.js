@@ -105,7 +105,6 @@ class Hue {
     let light = await this.getLightStateById(id)
     if (light.state.colormode === 'xy') {
       let xy = converter.calculateXY(r, g, b)
-      console.log(xy)
       let state = hue.lightState.create().xy(xy)
       result = await this.api.setLightState(id, state)
     } else {
@@ -233,6 +232,15 @@ class Hue {
   async setRoomBrightnessById (id, percentage) {
     let state = hue.lightState.create().brightness(percentage)
     let result = await this.api.setGroupLightState(id, state)
+    return result
+  }
+  async setRoomColorById (id, rgb) {
+    let result
+    let {r, g, b} = rgb
+    let xy = converter.calculateXY(r, g, b)
+    let state = hue.lightState.create().xy(xy)
+    result = await this.api.setGroupLightState(id, state)
+
     return result
   }
 }
