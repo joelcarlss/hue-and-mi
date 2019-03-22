@@ -64,6 +64,8 @@ module.exports = (server, hue) => {
     try {
       let id = req.params.id
       let lightState = req.body.lightState
+      console.log(lightState)
+
       let brightness = req.body.brightness
       let color = req.body.color
       // console.log(req.body)
