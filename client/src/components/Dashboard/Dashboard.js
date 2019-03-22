@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from '../Navbar/Navbar'
 import Rooms from '../Rooms/Rooms'
-//import Events from '../Events/Events'
+// import Events from '../Events/Events'
 import '../../App.css'
 
 class Dashboard extends Component {

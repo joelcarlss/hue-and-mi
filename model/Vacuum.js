@@ -49,12 +49,12 @@ class Vacuum {
   }
   async dock () {
     this.device.call('app_stop', [])
-    .then(console.log)
-    .then(() => this.device.call('app_charge', [], {
-      refresh: [ 'state' ],
-      refreshDelay: 1000
-    }))
-    .then(console.log)
+      .then(console.log)
+      .then(() => this.device.call('app_charge', [], {
+        refresh: [ 'state' ],
+        refreshDelay: 1000
+      }))
+      .then(console.log)
   }
 }
 

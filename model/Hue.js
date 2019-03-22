@@ -61,7 +61,7 @@ class Hue {
 
   // Returns all lights
   async getLights () {
-    let {lights} = await this.api.lights()
+    let { lights } = await this.api.lights()
     lights.forEach(light => {
       if (light.state.colormode === 'xy') {
         let x = light.state.xy[0]
@@ -101,7 +101,7 @@ class Hue {
   }
   async setRgbColor (id, rgb) {
     let result
-    let {r, g, b} = rgb
+    let { r, g, b } = rgb
     let light = await this.getLightStateById(id)
     if (light.state.colormode === 'xy') {
       let xy = converter.calculateXY(r, g, b)

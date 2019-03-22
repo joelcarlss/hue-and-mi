@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-/* 
+/*
   Toggel all ligths in room by ID
 */
 
@@ -18,14 +18,14 @@ export const toggelAllLightsInRoom = (id, bool) => {
     })
 }
 
-/* 
+/*
   Toggel singel light
 */
 
 export const toggelLightInRoom = (id, bool) => {
   let params = new URLSearchParams()
 
-  params.append('state', bool)
+  params.append('lightState', bool)
 
   axios.put(`things/hue/lights/${id}/actions/state`, params)
     .then((response) => {
@@ -36,7 +36,7 @@ export const toggelLightInRoom = (id, bool) => {
     })
 }
 
-/* 
+/*
   Get single lights properties
 */
 
@@ -48,7 +48,7 @@ export const getLampState = async (id) => {
   }
 }
 
-/* 
+/*
   Get a single rooms current properties
 */
 
@@ -60,12 +60,11 @@ export const getRoomState = async (id) => {
   }
 }
 
-/* 
+/*
   Adjust all lights brightness in a room
 */
 
 export const adjustBrightnessInRoom = (procent, roomID) => {
-
   let params = new URLSearchParams()
 
   params.append('percentage', procent)
@@ -79,12 +78,11 @@ export const adjustBrightnessInRoom = (procent, roomID) => {
     })
 }
 
-/* 
+/*
   Adjust single lights brightness
 */
 
 export const adjustLigthBrigthness = (procent, lightID) => {
-
   let params = new URLSearchParams()
 
   params.append('percentage', procent)

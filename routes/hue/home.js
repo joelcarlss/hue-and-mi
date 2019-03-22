@@ -3,6 +3,7 @@ module.exports = (server, hue) => {
     res.send('hello')
     next()
   })
+
   server.get('/things/hue/model', async (req, res, next) => {
     let result = await hue.getDescription()
       .then(({ version, manufacturer, model }) => (
