@@ -4,36 +4,32 @@ const sequelize = new Sequelize('mysql://root@127.0.0.1:3306/smarthome')
 exports.asd = () => {
   console.log(new Date(0, 0, 0, 12))
 }
-exports.createEvent = (name, fromHour, toHour, daysSinceLast) => {
-  const User = sequelize.define('user', {
-    username: Sequelize.STRING
-  })
 
-  sequelize.sync()
-    .then(() => User.create({
-      username: 'janedoe'
+const AutoClean = sequelize.define('autoClean', {
+  name: Sequelize.STRING,
+  fromHour: Sequelize.INTEGER,
+  toHour: Sequelize.INTEGER,
+  daysSinceLast: Sequelize.INTEGER
+})
+
+exports.createEvent = (name, fromHour, toHour, daysSinceLast) => {
+  return sequelize.sync()
+    .then(() => AutoClean.create({
+      name,
+      fromHour,
+      toHour,
+      daysSinceLast
+
     }))
-    .then(jane => {
-      console.log(jane.toJSON())
-    })
+    .then(result => result.toJSON())
+    .catch(console.log)
 }
 
-// exports.createEvent = (name, fromHour, toHour, daysSinceLast) => {
-//   const Event = sequelize.define('event', {
-//     name: Sequelize.STRING,
-//     fromHour: Sequelize.INTEGER,
-//     toHour: Sequelize.INTEGER,
-//     daysSinceLast: Sequelize.INTEGER
-//   })
-
-//   return sequelize.sync()
-//     .then(() => Event.create({
-//       name,
-//       fromHour,
-//       toHour,
-//       daysSinceLast
-
-//     }))
-//     .then(result => result.toJSON())
-//     .catch(console.log)
-// }
+exports.getEvents = (name, fromHour, toHour, daysSinceLast) => {
+  return sequelize.sync()
+    .then(() => AutoClean.findAll({
+      attributes: ['name', 'fromHour', 'toHour', 'saysSinceLast']
+    }))
+    .then(result => result.toJSON())
+    .catch(console.log)
+}
