@@ -1,6 +1,6 @@
 const utils = require('../../utils/hue')
 module.exports = (server, hue) => {
-    // ROOMS
+  // ROOMS
 
   server.get('/things/hue/rooms', async (req, res, next) => {
     let result

@@ -25,7 +25,7 @@ export const toggelAllLightsInRoom = (id, bool) => {
 export const toggelLightInRoom = (id, bool) => {
   let params = new URLSearchParams()
 
-  params.append('state', bool)
+  params.append('lightState', bool)
 
   axios.put(`things/hue/lights/${id}/actions/state`, params)
     .then((response) => {
