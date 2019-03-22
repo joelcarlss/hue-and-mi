@@ -63,16 +63,20 @@ module.exports = (server, hue) => {
     let result
     try {
       let id = req.params.id
-      let lightState = JSON.parse(req.body.lightState)
-      let brightness = JSON.parse(req.body.brightness)
-      let color = JSON.parse(req.body.color)
+      let lightState = req.body.lightState
+      let brightness = req.body.brightness
+      let color = req.body.color
+      // console.log(req.body)
       if (lightState) {
+        lightState = JSON.parse(lightState)
         result = await hue.setLightState(id, lightState)
       }
       if (brightness) {
+        brightness = JSON.parse(brightness)
         result = await hue.setBrightness(id, brightness)
       }
       if (color) {
+        color = JSON.parse(color)
         let {r, g, b} = color
         result = await hue.setRgbColor(id, {r, g, b})
       }
