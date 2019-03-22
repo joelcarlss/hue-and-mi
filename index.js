@@ -19,7 +19,7 @@ hue.connect()
 const local = new Local()
 
 async function test () {
-  const eventHandler = new EventHandler()
+  const eventHandler = new EventHandler(hue, vacuum)
   eventHandler.start()
 }
 var server = restify.createServer()
