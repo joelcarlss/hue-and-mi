@@ -36,6 +36,7 @@ class ModalRoom extends Component {
 
     toggelLight = async (id) => {
         let lampState = await getLampState(id)
+        console.log(lampState)
 
         if (lampState.state.on) {
             toggelLightInRoom(id, false)
