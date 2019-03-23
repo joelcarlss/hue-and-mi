@@ -108,3 +108,18 @@ Statestik navbar
     margin-bottom: 5%;
     margin-top: 5%;
 }
+
+
+.disconnectedVacuumerContainer{
+    height: 80px;
+    width: 240px;
+    background: #FFF;
+    text-align: center;
+    border-right: 1px solid black;
+    align-content: flex-end;
+
+}
+
+.disconnectedVacummerButton{
+margin-top: 25px
+}
