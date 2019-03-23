@@ -53,6 +53,7 @@ class CleanOnEvent {
     let differenceDays = Math.round(differenceTimestamp / 1000 / 60 / 60 / 24)
     return differenceDays
   }
+
   getLastCleanSimulation () {
     return '2019-03-20T09:36:57.000Z'
   }

@@ -1,4 +1,6 @@
 const Sequelize = require('sequelize')
+
+// const sequelize = new Sequelize('mariadb://@162.168.0.25:3306/smarthome')
 const sequelize = new Sequelize('mysql://root@127.0.0.1:3306/smarthome')
 
 const AutoClean = sequelize.define('autoClean', {

@@ -40,8 +40,8 @@ require('./routes/vacuum/home')(server, vacuum)
 require('./routes/vacuum/actions')(server, vacuum)
 require('./routes/vacuum/properties')(server, vacuum)
 
-server.listen(process.env.PORT || 8080, function () {
+server.listen(process.env.PORT || 8080, '192.168.0.11', function () {
   console.log('%s listening at %s', server.name, server.url)
 })
 
-test()
+// test()
