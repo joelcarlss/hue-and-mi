@@ -1,10 +1,6 @@
 const Sequelize = require('sequelize')
 const sequelize = new Sequelize('mysql://root@127.0.0.1:3306/smarthome')
 
-exports.asd = () => {
-  console.log(new Date())
-}
-
 const AutoClean = sequelize.define('autoClean', {
   name: Sequelize.STRING,
   fromHour: Sequelize.INTEGER,
@@ -28,8 +24,10 @@ exports.createEvent = (name, fromHour, toHour, daysSinceLast) => {
 exports.getEvents = () => {
   return sequelize.sync()
     .then(() => AutoClean.findAll({
-      attributes: ['name', 'fromHour', 'toHour', 'saysSinceLast']
+      attributes: ['name', 'fromHour', 'toHour', 'daysSinceLast']
     }))
-    .then(result => result.toJSON())
+    .then(result => {
+      return result.map(({name, fromHour, toHour, daysSinceLast}) => ({name, fromHour, toHour, daysSinceLast}))
+    })
     .catch(console.log)
 }
