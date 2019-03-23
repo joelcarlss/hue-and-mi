@@ -97,3 +97,14 @@ Rooms
     text-align: center;
     line-height: 200px;
 }
+
+/* 
+Statestik navbar
+*/
+
+.startStopButtons{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
