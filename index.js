@@ -40,6 +40,6 @@ require('./routes/hue/sensors')(server, hue)
 
 require('./routes/vacuum/home')(server, vacuum)
 
-server.listen(process.env.PORT || 8080, '192.168.0.11', function () {
+server.listen(process.env.PORT || 8080, process.env.URL, function () {
   console.log('%s listening at %s', server.name, server.url)
 })

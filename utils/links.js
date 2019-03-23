@@ -1,4 +1,6 @@
-exports.getLinks = (url, id = ':id') => {
+require('dotenv').config()
+const linkData = (id = ':id') => {
+  let url = 'http://' + process.env.URL
   const hue = {
     link: url + '/things/hue',
     method: ['GET'],
@@ -152,6 +154,8 @@ exports.getLinks = (url, id = ':id') => {
   }
 
   const home = {
+    link: url + '/',
+    method: ['GET'],
     model: {
       link: url + '/model',
       method: ['GET']
@@ -188,9 +192,20 @@ exports.getLinks = (url, id = ':id') => {
       hue
     }
   }
+  return home
+}
+
+module.exports = (path, id = ':id') => {
+  let links = linkData(id)
+  let next = {}
+  for (let key in links) {
+    if (key !== 'method' && key !== 'link') {
+      next[key] = links[key]
+    }
+  }
   return {
-    home,
-    hue,
-    vacuum
+    current: links.link,
+    method: links.method,
+    next
   }
 }

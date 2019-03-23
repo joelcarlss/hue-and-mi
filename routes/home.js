@@ -1,7 +1,11 @@
 let db = require('../model/database')
+let links = require('../utils/links')
 module.exports = (server, local, eventHandler) => {
   server.get('/', async (req, res, next) => {
-    res.send('Welcome')
+    let payload = {
+      links: links()
+    }
+    res.send(payload)
     next()
   })
   server.get('/model', async (req, res, next) => {
