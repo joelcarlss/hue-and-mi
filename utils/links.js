@@ -54,9 +54,64 @@ exports.getLinks = (url, id = ':id') => {
           method: ['GET']
         }
       }
-
     },
-    rooms: {}
+    rooms: {
+      link: url + '/things/hue/rooms',
+      method: ['GET'],
+      properties: {
+        link: url + '/things/hue/rooms/properties',
+        method: ['GET']
+      },
+      id: {
+        link: url + '/things/hue/rooms/' + id,
+        method: ['GET'],
+        model: {
+          link: url + '/things/hue/rooms/' + id + '/model',
+          method: ['GET']
+        },
+        actions: {
+          link: url + '/things/hue/rooms/' + id + '/actions',
+          method: ['GET'],
+          state: {
+            link: url + '/things/hue/rooms/' + id + '/actions/state',
+            method: ['GET'],
+            body: {
+              lightState: 'bool',
+              brightness: 'int',
+              color: {
+                r: 'string',
+                g: 'string',
+                b: 'string'
+              }
+            }
+          }
+        },
+        properties: {
+          link: url + '/things/hue/rooms/' + id + '/properties',
+          method: ['GET']
+        }
+      }
+    },
+    sensors: {
+      link: url + '/things/hue/sensors',
+      method: ['GET'],
+      properties: {
+        link: url + '/things/hue/sensors/properties',
+        method: ['GET']
+      },
+      id: {
+        link: url + '/things/hue/sensors/' + id,
+        method: ['GET'],
+        model: {
+          link: url + '/things/hue/sensors/' + id + '/model',
+          method: ['GET']
+        },
+        properties: {
+          link: url + '/things/hue/sensors/' + id + '/properties',
+          method: ['GET']
+        }
+      }
+    }
   }
 
   const vacuum = {
