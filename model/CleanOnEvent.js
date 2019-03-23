@@ -1,10 +1,10 @@
 class CleanOnEvent {
-  constructor (name, fromHour, toHour, daysSinceLast, hue, vacuum) {
+  constructor (name, fromHour, toHour, daysSinceLast, noMovement, hue, vacuum) {
     this.name = name
     this.fromHour = fromHour
     this.toHour = toHour
     this.daysSinceLast = daysSinceLast
-    this.noMovement = 3
+    this.noMovement = noMovement
     this.pollingTime = { h: 0, m: 30 }
     this.hue = hue
     this.vacuum = vacuum
