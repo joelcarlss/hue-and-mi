@@ -28,10 +28,17 @@ exports.createEvent = (name, fromHour, toHour, daysSinceLast, noMovement) => {
 exports.getEvents = () => {
   return sequelize.sync()
     .then(() => AutoClean.findAll({
-      attributes: ['name', 'fromHour', 'toHour', 'daysSinceLast', 'noMovement']
+      attributes: ['id', 'name', 'fromHour', 'toHour', 'daysSinceLast', 'noMovement']
     }))
-    .then(result => {
-      return result.map(({name, fromHour, toHour, daysSinceLast, noMovement}) => ({name, fromHour, toHour, daysSinceLast, noMovement}))
-    })
+    .then(result => result)
     .catch(console.log)
+}
+
+exports.deleteEvent = (id) => {
+  return sequelize.sync()
+    .then(() => AutoClean.destroy({
+      where: {
+        id: id
+      }}))
+  .catch(console.log)
 }

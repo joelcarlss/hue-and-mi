@@ -6,6 +6,7 @@ class CleanOnEvent {
     this.daysSinceLast = daysSinceLast
     this.noMovement = noMovement
     this.pollingTime = { h: 0, m: 30 }
+    this.timer = false
     this.hue = hue
     this.vacuum = vacuum
     this.runEvent()
@@ -59,10 +60,17 @@ class CleanOnEvent {
     let differenceDays = Math.round(differenceTimestamp / 1000 / 60 / 60 / 24)
     return differenceDays
   }
-  async startTimer () {
-    return setTimeout(() => {
+  startTimer () {
+    this.timer = setTimeout(() => {
       this.runEvent()
     }, this.getMillisecondsToNextPoll())
+    // }, 1000)
+  }
+  stopTimer () {
+    if (this.timer) {
+      console.log('topped')
+      clearTimeout(this.timer)
+    }
   }
   async runEvent () {
     if (await this.isRequirementsFullfilled()) {
@@ -70,8 +78,8 @@ class CleanOnEvent {
       this.execute()
     } else {
       console.log(`I'll check again in ${this.getTimerTime().h} hours and ${this.getTimerTime().m} minutes`)
-      this.startTimer()
     }
+    this.startTimer()
   }
 }
 

@@ -1,5 +1,5 @@
 let db = require('../model/database')
-module.exports = (server, local) => {
+module.exports = (server, local, eventHandler) => {
   server.get('/', async (req, res, next) => {
     res.send('Welcome')
     next()
@@ -21,6 +21,22 @@ module.exports = (server, local) => {
       let daysSinceLast = req.body.daysSinceLast
       let noMovement = req.body.noMovement
       let event = await db.createEvent(name, fromHour, toHour, daysSinceLast, noMovement)
+      eventHandler.restartEvents()
+      res.send(event)
+    } catch (e) {
+      res.send(e)
+    }
+    next()
+  })
+  server.del('/actions/autoClean', async (req, res, next) => {
+    try {
+      let name = req.body.name
+      let fromHour = req.body.fromHour
+      let toHour = req.body.toHour
+      let daysSinceLast = req.body.daysSinceLast
+      let noMovement = req.body.noMovement
+      let event = await db.createEvent(name, fromHour, toHour, daysSinceLast, noMovement)
+      eventHandler.restartEvents()
       res.send(event)
     } catch (e) {
       res.send(e)

@@ -8,20 +8,18 @@ const EventHandler = require('./model/EventHandler')
 const Vaccum = require('./model/Vacuum')
 const Local = require('./model/Local')
 const cors = require('cors')
-const vacuum = new Vaccum()
 
-function startEvents () {
-  const eventHandler = new EventHandler(hue, vacuum)
-  eventHandler.start()
-}
+const vacuum = new Vaccum()
 
 const hue = new Hue()
 hue.connect()
 
+const eventHandler = new EventHandler(hue, vacuum)
+
 vacuum.connect()
 .then(console.log)
-.then(async => {
-  console.log(startEvents())
+.then(async () => {
+  await eventHandler.start()
 })
 
 const local = new Local()
@@ -32,7 +30,7 @@ server.use(cors())
 server.use(bodyParser.urlencoded({ extended: true }))
 // server.use(jwt({ secret: process.env.SECRET }).unless({path: ['/', '/auth', '/user']}))
 
-require('./routes/home')(server, local)
+require('./routes/home')(server, local, eventHandler)
 
 require('./routes/hue/home')(server, hue)
 require('./routes/hue/actions')(server, hue)
