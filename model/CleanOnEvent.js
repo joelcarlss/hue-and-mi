@@ -12,8 +12,10 @@ class CleanOnEvent {
   }
   async runEvent () {
     console.log(this.getTimerTime())
-    console.log(await this.isFullfilled())
+    console.log(await this.getDaysSinceLastClean())
   }
+  // Returns time for next poll
+  // returns object: h: hour, m: minute
   getTimerTime () {
     let time = new Date()
     let h = time.getHours()
@@ -23,14 +25,18 @@ class CleanOnEvent {
     } else {
       let hoursLeft = (24 - h + this.fromHour)
       let minutesLeft = (60 - m)
-      console.log((24 - h + this.fromHour))
       return { h: hoursLeft, m: minutesLeft }
     }
   }
   execute () {
     this.vacuum.clean()
   }
-  async isFullfilled () {
+  async isRequirementsFullfilled () {
+    let lastMove = this.getHourSinceLastMovement()
+    let lastClean = this.getDaysSinceLastClean()
+    return (lastMove >= this.noMovement && lastClean >= this.getDaysSinceLastClean())
+  }
+  async getHourSinceLastMovement () {
     let sensor = await this.hue.getLastActiveSensor()
     let lastMovement = new Date(sensor.state.lastupdated).getTime() + (1 * 60 * 60 * 1000)
     let currentTime = new Date().getTime()
@@ -38,6 +44,17 @@ class CleanOnEvent {
     let differenceHours = Math.floor(differenceTimestamp / 1000 / 60 / 60)
 
     return differenceHours
+  }
+  async getDaysSinceLastClean () {
+    let lastClean = await this.getLastCleanSimulation()
+    let lastCleanTime = new Date(lastClean).getTime() + (1 * 60 * 60 * 1000)
+    let currentTime = new Date().getTime()
+    let differenceTimestamp = currentTime - lastCleanTime
+    let differenceDays = Math.round(differenceTimestamp / 1000 / 60 / 60 / 24)
+    return differenceDays
+  }
+  getLastCleanSimulation () {
+    return '2019-03-20T09:36:57.000Z'
   }
 }
 

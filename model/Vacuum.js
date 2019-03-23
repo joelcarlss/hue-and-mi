@@ -11,8 +11,13 @@ class Vacuum {
       this.device = await miio.device({ address: process.env.VACUUM_IP, token: process.env.VACUUM_TOKEN })
       return this.device
     } catch (e) {
-      console.log(e)
+      setTimeout(() => this.connect(), 3000, clearTimeout())
     }
+  }
+  async connectionAttempt () {
+    this.device = await miio.device({ address: process.env.VACUUM_IP, token: process.env.VACUUM_TOKEN })
+      .then(call => console.log(call))
+    return this.device
   }
   async getAbout () {
     console.log('getAbout')
@@ -37,8 +42,19 @@ class Vacuum {
     return isCleaning
   }
   async getCleaningHistory () {
-    const result = await this.device.getHistory(0)
+    const result = await this.device.getHistory()
     return result
+  }
+  async getLastClean () {
+    const result = await this.getCleaningHistory()
+    let highestTime = new Date(1970)
+    result.days.forEach(element => {
+      if (highestTime < element) {
+        let time = new Date(element)
+        highestTime = time
+      }
+    })
+    return highestTime
   }
   async clean () {
     const result = await this.device.call('app_start', [], {
