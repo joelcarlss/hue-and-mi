@@ -5,26 +5,6 @@ module.exports = (server, hue) => {
     res.send('HATEOAS HERE?')
     next()
   })
-  // All lights actions
-  server.get('/things/hue/lights/actions', async (req, res, next) => {
-    res.send('hello')
-    next()
-  })
-
-  server.put('/things/hue/lights/actions/state', async (req, res, next) => {
-    let result
-    try {
-      let lightState = JSON.parse(req.body.lightState)
-      if (lightState) {
-        result = 'TODO: I SHOULD CHANGE STATE ON ALL'
-      }
-    } catch (e) {
-      result = utils.handleError(e)
-    }
-    res.send(result)
-    next()
-  })
-
   // All lights properties
   server.get('/things/hue/lights/properties', async (req, res, next) => {
     let result
@@ -35,6 +15,11 @@ module.exports = (server, hue) => {
       result = utils.handleError(e)
     }
     res.send(result)
+    next()
+  })
+
+  server.get('/things/hue/lights/:id', async (req, res, next) => {
+    res.send('HATEOAS HERE')
     next()
   })
 
@@ -64,10 +49,9 @@ module.exports = (server, hue) => {
     try {
       let id = req.params.id
       let lightState = req.body.lightState
-      console.log(lightState)
-
       let brightness = req.body.brightness
       let color = req.body.color
+
       if (lightState) {
         lightState = JSON.parse(lightState)
         result = await hue.setLightState(id, lightState)

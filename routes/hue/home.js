@@ -33,8 +33,4 @@ module.exports = (server, hue) => {
     res.send(lightStates)
     next()
   })
-  server.get('/things/hue/things', async (req, res, next) => {
-    res.send('hello')
-    next()
-  })
 }

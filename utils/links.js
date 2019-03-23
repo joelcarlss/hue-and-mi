@@ -1,13 +1,61 @@
-exports.getLinks = (url) => {
+exports.getLinks = (url, id = ':id') => {
   const hue = {
+    link: url + '/things/hue',
+    method: ['GET'],
     model: {
       link: url + '/things/hue/model',
       method: ['GET']
     },
     actions: {
+      link: url + '/things/hue/actions',
+      method: ['GET']
     },
-    properties: {},
-    lights: {},
+    properties: {
+      link: url + '/things/hue/properties',
+      method: ['GET'],
+      lightStates: {
+        link: url + '/things/hue/properties/lightStates',
+        method: ['GET']
+      }
+    },
+    lights: {
+      link: url + '/things/hue/lights',
+      method: ['GET'],
+      properties: {
+        link: url + '/things/hue/lights/properties',
+        method: ['GET']
+      },
+      id: {
+        link: url + '/things/hue/lights/' + id,
+        method: ['GET'],
+        model: {
+          link: url + '/things/hue/lights/' + id + '/model',
+          method: ['GET']
+        },
+        actions: {
+          link: url + '/things/hue/lights/' + id + '/actions',
+          method: ['GET'],
+          state: {
+            link: url + '/things/hue/lights/' + id + '/actions/state',
+            method: ['PUT'],
+            body: {
+              lightState: 'bool',
+              brightness: 'int',
+              color: {
+                r: 'string',
+                g: 'string',
+                b: 'string'
+              }
+            }
+          }
+        },
+        properties: {
+          link: url + '/things/hue/lights/' + id + '/properties',
+          method: ['GET']
+        }
+      }
+
+    },
     rooms: {}
   }
 
