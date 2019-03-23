@@ -10,17 +10,22 @@ const Local = require('./model/Local')
 const cors = require('cors')
 const vacuum = new Vaccum()
 
-vacuum.connect().then(console.log)
+function startEvents () {
+  const eventHandler = new EventHandler(hue, vacuum)
+  eventHandler.start()
+}
 
 const hue = new Hue()
 hue.connect()
 
+vacuum.connect()
+.then(console.log)
+.then(async => {
+  console.log(startEvents())
+})
+
 const local = new Local()
 
-async function test () {
-  const eventHandler = new EventHandler(hue, vacuum)
-  eventHandler.start()
-}
 var server = restify.createServer()
 server.use(cors())
 
@@ -43,5 +48,3 @@ require('./routes/vacuum/properties')(server, vacuum)
 server.listen(process.env.PORT || 8080, '192.168.0.11', function () {
   console.log('%s listening at %s', server.name, server.url)
 })
-
-// test()

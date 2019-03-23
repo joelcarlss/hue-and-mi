@@ -33,7 +33,7 @@ class CardProfle extends Component {
 
   toggelAllLightsInRoom = async (id) => {
     let roomState = await getRoomState(id)
-    console.log(roomState)
+    // console.log(roomState)
     console.log(this.state.rooms)
     if (roomState.lastAction.on) {
       toggelAllLightsInRoom(id, false)

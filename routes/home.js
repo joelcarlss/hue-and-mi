@@ -14,13 +14,17 @@ module.exports = (server, local) => {
   })
 
   server.post('/actions/autoClean', async (req, res, next) => {
-    let name = req.body.name
-    let fromHour = JSON.parse(req.body.fromHour)
-    let toHour = JSON.parse(req.body.toHour)
-    let daysSinceLast = JSON.parse(req.body.daysSinceLast)
-    let noMovement = JSON.parse(req.body.noMovement)
-    let event = await db.createEvent(name, fromHour, toHour, daysSinceLast, noMovement)
-    res.send(event)
+    try {
+      let name = req.body.name
+      let fromHour = req.body.fromHour
+      let toHour = req.body.toHour
+      let daysSinceLast = req.body.daysSinceLast
+      let noMovement = req.body.noMovement
+      let event = await db.createEvent(name, fromHour, toHour, daysSinceLast, noMovement)
+      res.send(event)
+    } catch (e) {
+      res.send(e)
+    }
     next()
   })
   server.get('/properties', async (req, res, next) => {
