@@ -1,4 +1,9 @@
 @import '~antd/dist/antd.css';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
 .site {
     display: flex;
     min-height: 100vh;
@@ -88,7 +93,6 @@ Rooms
 */
 
 .roomsCard {
-    background: #84dcc6;
     width: 272px;
     height: 200px;
 }
@@ -96,30 +100,33 @@ Rooms
 .roomText {
     text-align: center;
     line-height: 200px;
+    border: 1px solid black;
 }
 
 /* 
 Statestik navbar
 */
 
-.startStopButtons{
+.startStopButtons {
     display: flex;
     justify-content: space-between;
     margin-bottom: 5%;
     margin-top: 5%;
 }
 
-
-.disconnectedVacuumerContainer{
+.disconnectedVacuumerContainer {
     height: 80px;
     width: 240px;
     background: #FFF;
     text-align: center;
     border-right: 1px solid black;
     align-content: flex-end;
-
 }
 
-.disconnectedVacummerButton{
-margin-top: 25px
+.disconnectedVacummerButton {
+    margin-top: 25px
+}
+
+.fakeBR {
+    height: 20px;
 }

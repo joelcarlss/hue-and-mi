@@ -8,7 +8,7 @@ import NotFound from './components/NotFound/NotFound'
 import './App.css'
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <Provider store={store}>
         <Router history={history}>
