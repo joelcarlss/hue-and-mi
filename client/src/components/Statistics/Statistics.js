@@ -40,7 +40,7 @@ class Statistics extends Component {
 
     if (vacuumerStatus === undefined || vacuumerStatus === true || vacuumerStatus === false) {
       return (
-        <div style={{color:'#FFF', textAlign: 'center'}}>Vacuumer disconnected</div>
+        <div style={{ color: '#FFF', textAlign: 'center' }}>Vacuumer disconnected</div>
       )
     } else {
       const Description = ({ term, children, span = 12 }) => (
