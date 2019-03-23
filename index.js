@@ -34,8 +34,6 @@ server.use(bodyParser.urlencoded({ extended: true }))
 require('./routes/home')(server, local, eventHandler)
 
 require('./routes/hue/home')(server, hue)
-require('./routes/hue/actions')(server, hue)
-require('./routes/hue/properties')(server, hue)
 require('./routes/hue/rooms')(server, hue)
 require('./routes/hue/lights')(server, hue)
 require('./routes/hue/sensors')(server, hue)
