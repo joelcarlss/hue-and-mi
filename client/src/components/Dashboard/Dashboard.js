@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from '../Navbar/Navbar'
 import Rooms from '../Rooms/Rooms'
-// import Events from '../Events/Events'
+ import Events from '../Events/Events'
 import '../../App.css'
 
 class Dashboard extends Component {
@@ -13,7 +13,7 @@ class Dashboard extends Component {
         </nav>
         <main className='site-content'>
           <section className='content-topic'>
-            <Rooms />
+            <Events />
           </section>
         </main>
       </div>

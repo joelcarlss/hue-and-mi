@@ -10,14 +10,16 @@ const Local = require('./model/Local')
 const cors = require('cors')
 const vacuum = new Vaccum()
 
+
 // vacuum.connect().then(console.log)
+
 
 const hue = new Hue()
 hue.connect()
 
 const local = new Local()
 
-async function test () {
+async function test() {
   const eventHandler = new EventHandler(hue, vacuum)
   eventHandler.start()
 }
@@ -44,4 +46,4 @@ server.listen(process.env.PORT || 8080, function () {
   console.log('%s listening at %s', server.name, server.url)
 })
 
-test()
+//test()
