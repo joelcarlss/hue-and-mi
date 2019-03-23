@@ -1,16 +1,44 @@
 const axios = require('axios')
 
 export const turnOffVacuumerAction = (bool) => {
-  let cleanState = bool
-  console.log(cleanState)
+  let params = new URLSearchParams()
+
+  params.append('cleanState', bool)
+
+  axios.put(`things/vacuum/actions/state`, params)
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log('an error occurred : ' + error)
+    })
 }
 
 export const turnOnVacuumerAction = (bool) => {
-  let cleanState = bool
-  console.log(cleanState)
+  let params = new URLSearchParams()
+
+  params.append('cleanState', bool)
+
+  axios.put(`things/vacuum/actions/state`, params)
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log('an error occurred : ' + error)
+    })
 }
 
+
 export const dockVacummerAction = (bool) => {
-  let cleanState = bool
-  console.log(cleanState)
+  let params = new URLSearchParams()
+
+  params.append('dockState', bool)
+
+  axios.put(`things/vacuum/actions/state`, params)
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log('an error occurred : ' + error)
+    })
 }
