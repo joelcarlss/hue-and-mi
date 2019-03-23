@@ -9,6 +9,7 @@ class Vacuum {
   async connect () {
     try {
       this.device = await miio.device({ address: process.env.VACUUM_IP, token: process.env.VACUUM_TOKEN })
+      console.log('polling')
       return this.device
     } catch (e) {
       setTimeout(() => this.connect(), 3000, clearTimeout())
