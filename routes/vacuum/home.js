@@ -19,6 +19,7 @@ module.exports = (server, vacuum) => {
   })
   server.get('/things/vacuum/properties', async (req, res, next) => {
     let result = await vacuum.getState()
+    result.lastClean = await vacuum.getLastClean()
     res.send(result)
     next()
   })

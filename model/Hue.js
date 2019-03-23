@@ -73,6 +73,20 @@ class Hue {
     return lights
   }
 
+  // Returns all lights
+  // async getLights () {
+  //   let { lights } = await this.api.lights()
+  //   let array = []
+  //   lights.forEach(light => {
+  //     if (light.state.colormode === 'xy') {
+  //       array.push(this.api.lightStatusWithRGB(light.id))
+  //     } else {
+  //       array.push(light)
+  //     }
+  //   })
+  //   return Promise.resolve(array)
+  // }
+
   // Single Light
   async getLightStateById (id) {
     let light = await this.api.lightStatus(id)
@@ -104,8 +118,7 @@ class Hue {
     let { r, g, b } = rgb
     let light = await this.getLightStateById(id)
     if (light.state.colormode === 'xy') {
-      let xy = converter.calculateXY(r, g, b)
-      let state = hue.lightState.create().xy(xy)
+      let state = hue.lightState.create().rgb(r, g, b)
       result = await this.api.setLightState(id, state)
     } else {
       result = 'Not a colorlamp'
@@ -237,8 +250,7 @@ class Hue {
   async setRoomColorById (id, rgb) {
     let result
     let {r, g, b} = rgb
-    let xy = converter.calculateXY(r, g, b)
-    let state = hue.lightState.create().xy(xy)
+    let state = hue.lightState.create().rgb(r, g, b)
     result = await this.api.setGroupLightState(id, state)
 
     return result

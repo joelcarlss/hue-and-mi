@@ -5,16 +5,18 @@ const AutoClean = sequelize.define('autoClean', {
   name: Sequelize.STRING,
   fromHour: Sequelize.INTEGER,
   toHour: Sequelize.INTEGER,
-  daysSinceLast: Sequelize.INTEGER
+  daysSinceLast: Sequelize.INTEGER,
+  noMovement: Sequelize.INTEGER
 })
 
-exports.createEvent = (name, fromHour, toHour, daysSinceLast) => {
+exports.createEvent = (name, fromHour, toHour, daysSinceLast, noMovement) => {
   return sequelize.sync()
     .then(() => AutoClean.create({
       name,
       fromHour,
       toHour,
-      daysSinceLast
+      daysSinceLast,
+      noMovement
 
     }))
     .then(result => result.toJSON())
@@ -24,10 +26,10 @@ exports.createEvent = (name, fromHour, toHour, daysSinceLast) => {
 exports.getEvents = () => {
   return sequelize.sync()
     .then(() => AutoClean.findAll({
-      attributes: ['name', 'fromHour', 'toHour', 'daysSinceLast']
+      attributes: ['name', 'fromHour', 'toHour', 'daysSinceLast', 'noMovement']
     }))
     .then(result => {
-      return result.map(({name, fromHour, toHour, daysSinceLast}) => ({name, fromHour, toHour, daysSinceLast}))
+      return result.map(({name, fromHour, toHour, daysSinceLast, noMovement}) => ({name, fromHour, toHour, daysSinceLast, noMovement}))
     })
     .catch(console.log)
 }

@@ -15,4 +15,13 @@ module.exports = (server, vacuum) => {
     }
     next()
   })
+  server.get('/things/vacuum/properties/cleanLog', async (req, res, next) => {
+    try {
+      let result = await vacuum.getCleaningHistory()
+      res.send(result)
+    } catch (e) {
+      res.send(e)
+    }
+    next()
+  })
 }
