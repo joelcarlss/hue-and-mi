@@ -28,16 +28,13 @@ module.exports = (server, local, eventHandler) => {
     }
     next()
   })
-  server.del('/actions/autoClean', async (req, res, next) => {
+  server.del('/actions/autoClean/:id', async (req, res, next) => {
     try {
-      let name = req.body.name
-      let fromHour = req.body.fromHour
-      let toHour = req.body.toHour
-      let daysSinceLast = req.body.daysSinceLast
-      let noMovement = req.body.noMovement
-      let event = await db.createEvent(name, fromHour, toHour, daysSinceLast, noMovement)
+      let id = req.params.id
+      await db.deleteEvent(id)
       eventHandler.restartEvents()
-      res.send(event)
+
+      res.send('ok')
     } catch (e) {
       res.send(e)
     }
