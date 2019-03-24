@@ -1,7 +1,11 @@
 let db = require('../model/database')
-module.exports = (server, local) => {
+let links = require('../utils/links')
+module.exports = (server, local, eventHandler) => {
   server.get('/', async (req, res, next) => {
-    res.send('Welcome')
+    let payload = {
+      links: links()
+    }
+    res.send(payload)
     next()
   })
   server.get('/model', async (req, res, next) => {
@@ -12,23 +16,41 @@ module.exports = (server, local) => {
     res.send('Here one can do things like set events')
     next()
   })
-  server.get('/actions/autoClean', async (req, res, next) => {
-    let event = await db.getEvents()
-    res.send(event)
+
+  server.post('/actions/autoClean', async (req, res, next) => {
+    try {
+      let name = req.body.name
+      let fromHour = req.body.fromHour
+      let toHour = req.body.toHour
+      let daysSinceLast = req.body.daysSinceLast
+      let noMovement = req.body.noMovement
+      let event = await db.createEvent(name, fromHour, toHour, daysSinceLast, noMovement)
+      eventHandler.restartEvents()
+      res.send(event)
+    } catch (e) {
+      res.send(e)
+    }
     next()
   })
-  server.post('/actions/autoClean', async (req, res, next) => {
-    let name = req.body.name
-    let fromHour = JSON.parse(req.body.fromHour)
-    let toHour = JSON.parse(req.body.toHour)
-    let daysSinceLast = JSON.parse(req.body.daysSinceLast)
-    let noMovement = JSON.parse(req.body.noMovement)
-    let event = await db.createEvent(name, fromHour, toHour, daysSinceLast, noMovement)
-    res.send(event)
+  server.del('/actions/autoClean/:id', async (req, res, next) => {
+    try {
+      let id = req.params.id
+      await db.deleteEvent(id)
+      eventHandler.restartEvents()
+
+      res.send('ok')
+    } catch (e) {
+      res.send(e)
+    }
     next()
   })
   server.get('/properties', async (req, res, next) => {
     res.send('Here one can se the active events etc')
+    next()
+  })
+  server.get('/properties/autoClean', async (req, res, next) => {
+    let event = await db.getEvents()
+    res.send(event)
     next()
   })
   server.get('/things', async (req, res, next) => {

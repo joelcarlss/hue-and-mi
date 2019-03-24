@@ -1,3 +1,4 @@
+const utils = require('../../utils/hue')
 module.exports = (server, hue) => {
   server.get('/things/hue', async (req, res, next) => {
     res.send('hello')
@@ -26,8 +27,10 @@ module.exports = (server, hue) => {
     res.send('hello')
     next()
   })
-  server.get('/things/hue/things', async (req, res, next) => {
-    res.send('hello')
+  server.get('/things/hue/properties/lightStates', async (req, res, next) => {
+    let lightData = await hue.getLights()
+    let lightStates = utils.getStates(lightData)
+    res.send(lightStates)
     next()
   })
 }

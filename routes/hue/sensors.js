@@ -21,6 +21,16 @@ module.exports = (server, hue) => {
     next()
   })
 
+  server.get('/things/hue/sensors/:id', async (req, res, next) => {
+    let result
+    try {
+      result = 'HATEOAS HERE'
+    } catch (e) {
+      result = utils.handleError(e)
+    }
+    res.send(result)
+    next()
+  })
   // Sensors by id model
   server.get('/things/hue/sensors/:id/model', async (req, res, next) => {
     let result

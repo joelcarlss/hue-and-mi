@@ -5,17 +5,29 @@ class EventHandler {
     constructor (hue, vacuum) {
         this.hue = hue
         this.vacuum = vacuum
+        this.runningEvents = []
     }
     start () {
-      this.handleCleanOnEvent()
+      this.startCleanOnEvent()
     }
-    async handleCleanOnEvent () {
+    async startCleanOnEvent () {
         let events = await database.getEvents()
-        let runningEvents = []
+        this.runningEvents = []
         events.forEach(event => {
             let {name, fromHour, toHour, daysSinceLast, noMovement} = event
-            runningEvents.push(new CleanOnEvent(name, fromHour, toHour, daysSinceLast, noMovement, this.hue, this.vacuum))
+            this.runningEvents.push(new CleanOnEvent(name, fromHour, toHour, daysSinceLast, noMovement, this.hue, this.vacuum))
         })
+        console.log(`${this.runningEvents.length} events started`)
+    }
+    async stopAllEvents () {
+        this.runningEvents.forEach(element => {
+            element.stopTimer()
+        });
+        console.log(`${this.runningEvents.length} events were stopped`)
+    }
+    async restartEvents () {
+        this.stopAllEvents()
+        .then(this.startCleanOnEvent())
     }
   }
   
