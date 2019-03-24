@@ -138,8 +138,8 @@ module.exports = (id = ':id') => {
     properties: {
       link: url + '/things/vacuum/properties',
       method: ['GET'],
-      battery: {
-        link: url + '/things/vacuum/properties/battery',
+      batteryLevel: {
+        link: url + '/things/vacuum/properties/batteryLevel',
         method: ['GET']
       },
       cleanState: {
@@ -165,7 +165,7 @@ module.exports = (id = ':id') => {
       method: ['GET'],
       autoClean: {
         link: url + '/actions/autoClean',
-        method: ['POST'],
+        method: ['POST, GET'],
         body: {
           name: 'string',
           fronHour: 'enum',

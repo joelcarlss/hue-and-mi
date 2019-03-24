@@ -1,4 +1,4 @@
-module.exports = (path, data) => {
+module.exports = (path, data, response) => {
   let next = {}
   for (let key in path) {
     if (key !== 'method' && key !== 'link') {
@@ -6,6 +6,7 @@ module.exports = (path, data) => {
     }
   }
   return {
+    response,
     data,
     links: {
       self: path.link,
