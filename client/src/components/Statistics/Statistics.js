@@ -29,18 +29,22 @@ class Statistics extends Component {
   }
 
   renderVacuumerDockStatus = (vacuumerStatus) => {
-    console.log(vacuumerStatus)
-
     if (vacuumerStatus) {
-      return 'charging'
+      return 'Charging'
     }
+  }
+
+  renderLastClean = (lastCleanString) => {
+    let newString = lastCleanString.replace('T', ' ');
+    return newString.slice(0, 16)
+
   }
 
   renderVacuumerStatus = (vacuumerStatus) => {
 
     if (vacuumerStatus === undefined || vacuumerStatus === true || vacuumerStatus === false) {
       return (
-        <div style={{color:'#FFF', textAlign: 'center'}}>Vacuumer disconnected</div>
+        <div style={{ color: '#FFF', textAlign: 'center' }}>Vacuumer disconnected</div>
       )
     } else {
       const Description = ({ term, children, span = 12 }) => (
@@ -55,10 +59,10 @@ class Statistics extends Component {
       const content = (
         <Row span={24}>
           <Description term='Battery'>Last Clean {' '}</Description>
-          <Description term={<Tag color='green'>{vacuumerStatus.batteryLevel}</Tag>}>
-            2017-01-10 <br />
-            20:03:10
-        </Description>
+          <Description size={200} term={<Tag color='green'>{vacuumerStatus.batteryLevel}</Tag>}>
+            <div className="fakeBR"></div>
+            {this.renderLastClean(vacuumerStatus.lastClean)}
+          </Description>
         </Row>
       )
 

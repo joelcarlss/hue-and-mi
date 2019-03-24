@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Router, Route, Switch } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from './config/store'
 import history from './config/history'
 import Dashboard from './components/Dashboard/Dashboard.js'
 import NotFound from './components/NotFound/NotFound'
@@ -8,7 +10,7 @@ import './App.css'
 class App extends Component {
   render () {
     return (
-      <div>
+      <Provider store={store}>
         <Router history={history}>
           <div>
             <Switch>
@@ -17,7 +19,7 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
-      </div>
+      </Provider>
     )
   }
 }

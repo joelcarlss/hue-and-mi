@@ -28,7 +28,6 @@ export const turnOnVacuumerAction = (bool) => {
     })
 }
 
-
 export const dockVacummerAction = (bool) => {
   let params = new URLSearchParams()
 
