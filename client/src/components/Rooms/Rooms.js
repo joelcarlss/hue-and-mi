@@ -33,8 +33,6 @@ class CardProfle extends Component {
 
   toggelAllLightsInRoom = async (id) => {
     let roomState = await getRoomState(id)
-    console.log(roomState)
-    console.log(this.state.rooms)
     if (roomState.lastAction.on) {
       toggelAllLightsInRoom(id, false)
     } else if (!roomState.lastAction.on) {
@@ -67,7 +65,7 @@ class CardProfle extends Component {
               <IconText type='bulb' text={item.lights} />,
               <BrigthnessModal roomID={item.id} roomName={item.title} />]}
           >
-            <div className='roomsCard'> <p className='roomText'>{item.title}</p></div>
+            <div className='roomsCard'> <p className='roomText'>{item.title}  <Icon type="bulb" /></p>  </div>
           </List.Item>
         )}
       />

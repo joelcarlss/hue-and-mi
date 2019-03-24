@@ -4,9 +4,9 @@ const axios = require('axios')
   Fetch all rooms
 */
 
-export const getRooms = async (value) => {
+export const getEvents = async (value) => {
   try {
-    let { data } = await axios.get('things/hue/rooms/properties')
+    let { data } = await axios.get('properties/autoClean')
 
     return data
   } catch (e) {
