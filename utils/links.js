@@ -1,5 +1,5 @@
 require('dotenv').config()
-const linkData = (id = ':id') => {
+module.exports = (id = ':id') => {
   let url = 'http://' + process.env.URL
   const hue = {
     link: url + '/things/hue',
@@ -168,13 +168,13 @@ const linkData = (id = ':id') => {
         method: ['POST'],
         body: {
           name: 'string',
-          fronHour: 'integer',
-          toHour: 'integer',
-          daysSinceLast: 'integer',
-          noMovement: 'integer'
+          fronHour: 'enum',
+          toHour: 'enum',
+          daysSinceLast: 'enum',
+          noMovement: 'enum'
         },
         id: {
-          link: url + '/actions/autoClean/:id',
+          link: url + '/actions/autoClean/' + id,
           method: ['DEL']
         }
       }
@@ -193,19 +193,4 @@ const linkData = (id = ':id') => {
     }
   }
   return home
-}
-
-module.exports = (path, id = ':id') => {
-  let links = linkData(id)
-  let next = {}
-  for (let key in links) {
-    if (key !== 'method' && key !== 'link') {
-      next[key] = links[key]
-    }
-  }
-  return {
-    current: links.link,
-    method: links.method,
-    next
-  }
 }

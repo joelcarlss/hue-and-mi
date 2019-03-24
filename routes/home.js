@@ -1,19 +1,61 @@
 let db = require('../model/database')
-let links = require('../utils/links')
+let linkData = require('../utils/links')
+let payload = require('../utils/payload')
 module.exports = (server, local, eventHandler) => {
   server.get('/', async (req, res, next) => {
-    let payload = {
-      links: links()
+    let data = {
+      title: 'MiAndHue',
+      description: 'A Smart Home Raspberry Pi project connecting Philips Hue With Xiaomi Vacuum cleaners',
+      authors: 'Carl Ejnarsson (ce222qw) and Joel Carlsson (jc222mw)'
     }
-    res.send(payload)
+    res.send(payload(linkData(), data))
     next()
   })
   server.get('/model', async (req, res, next) => {
-    res.send(local.getAboutData())
+    let links = linkData().model
+    let data = local.getAboutData()
+    res.send(payload(links, data))
     next()
   })
   server.get('/actions', async (req, res, next) => {
-    res.send('Here one can do things like set events')
+    let data = {
+      title: 'List of actions',
+      resources: {
+        autoClean: {
+          name: 'Set Autonomous Clean Event',
+          descriptions: 'Create event for autonomus cleaning dependent on days since last clean, hours since last movement in home and time of the day',
+          values: {
+            name: {
+              type: 'string',
+              string: 'Name of event by choice',
+              required: 'true'
+            },
+            fromHour: {
+              type: 'enum',
+              enum: '0-23',
+              required: 'true'
+            },
+            toHour: {
+              type: 'enum',
+              enum: '0-23',
+              required: 'true'
+            },
+            daysSinceLast: {
+              type: 'enum',
+              enum: '0-99',
+              required: 'true'
+            },
+            noMovement: {
+              type: 'enum',
+              enum: '0-23',
+              required: 'true'
+            }
+          }
+        }
+      }
+    }
+    let links = linkData().actions
+    res.send(payload(links, data))
     next()
   })
 
