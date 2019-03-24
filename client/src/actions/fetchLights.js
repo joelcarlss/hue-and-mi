@@ -5,7 +5,7 @@ const axios = require('axios')
 */
 
 export const geAllLights = (value) => {
-  axios.get('/things/hue/lights/things')
+  axios.get('/things/hue/lights/properties/state')
     .then((response) => {
       console.log(response.data)
     })

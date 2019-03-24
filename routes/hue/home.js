@@ -1,7 +1,12 @@
-const utils = require('../../utils/hue')
+let linkData = require('../../utils/links')
+let aboutData = require('../../utils/data')
+let payload = require('../../utils/payload')
 module.exports = (server, hue) => {
   server.get('/things/hue', async (req, res, next) => {
-    res.send('hello')
+    let response = 'Welcome'
+    let data = aboutData.hue.home
+    let links = linkData().things.hue
+    res.send(payload(links, data, response))
     next()
   })
 
@@ -16,21 +21,9 @@ module.exports = (server, hue) => {
           version
         }
       ))
-    res.send(result)
-    next()
-  })
-  server.get('/things/hue/actions', async (req, res, next) => {
-    res.send('hello')
-    next()
-  })
-  server.get('/things/hue/properties', async (req, res, next) => {
-    res.send('hello')
-    next()
-  })
-  server.get('/things/hue/properties/lightStates', async (req, res, next) => {
-    let lightData = await hue.getLights()
-    let lightStates = utils.getStates(lightData)
-    res.send(lightStates)
+    let data = aboutData.hue.model
+    let links = linkData().things.hue.model
+    res.send(payload(links, data, result))
     next()
   })
 }

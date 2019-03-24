@@ -7,8 +7,7 @@ class Local {
       name: 'My WoT Raspberry PI',
       description: 'A WoT project with Raspberry PI connecting Philips Hue with Xiaomi S50 Vacuum.',
       manufacturer: 'Raspberry Pi',
-      model: 'TODO: Find model',
-      image: 'TODO: Real picture http://devices.webofthings.io:9090/snapshot.cgi?user=snapshots&pwd=4MXfTSr0gH',
+      model: 'Raspberry Pi 3',
       tags: [
         'raspberry',
         'pi',
