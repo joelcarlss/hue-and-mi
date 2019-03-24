@@ -107,15 +107,16 @@ module.exports = (server, hue) => {
   })
   server.get('/things/hue/lights/:id/properties/state', async (req, res, next) => {
     let result = ''
+    let id = req.params.id
     try {
-      let id = req.params.id
-
       result = await hue.getLightStateById(id)
         .then(({ id, state, type, name }) => ({ name, type, id, state }))
     } catch (e) {
       result = utils.handleError(e)
     }
-    res.send(result)
+    let data = aboutData.lights.id.properties.resources.state
+    let links = linkData(id).things.hue.lights.id.properties.state
+    res.send(payload(links, data, result))
     next()
   })
 }

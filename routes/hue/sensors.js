@@ -1,8 +1,14 @@
 const utils = require('../../utils/hue')
+let linkData = require('../../utils/links')
+let aboutData = require('../../utils/data')
+let payload = require('../../utils/payload')
 module.exports = (server, hue) => {
 // All sensors
   server.get('/things/hue/sensors', async (req, res, next) => {
-    res.send('HATEOAS HERE?')
+    let response = 'Welcome'
+    let data = aboutData.sensors.home
+    let links = linkData().things.hue.sensors
+    res.send(payload(links, data, response))
     next()
   })
 

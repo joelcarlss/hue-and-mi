@@ -70,7 +70,11 @@ module.exports = (id = ':id') => {
       method: ['GET'],
       properties: {
         link: url + '/things/hue/rooms/properties',
-        method: ['GET']
+        method: ['GET'],
+        state: {
+          link: url + '/things/hue/rooms/properties/state',
+          method: ['GET']
+        }
       },
       id: {
         link: url + '/things/hue/rooms/' + id,
@@ -98,7 +102,11 @@ module.exports = (id = ':id') => {
         },
         properties: {
           link: url + '/things/hue/rooms/' + id + '/properties',
-          method: ['GET']
+          method: ['GET'],
+          state: {
+            link: url + '/things/hue/rooms/' + id + '/properties/state',
+            method: ['GET']
+          }
         }
       }
     },
@@ -107,7 +115,11 @@ module.exports = (id = ':id') => {
       method: ['GET'],
       properties: {
         link: url + '/things/hue/sensors/properties',
-        method: ['GET']
+        method: ['GET'],
+        state: {
+          link: url + '/things/hue/sensors/properties/state',
+          method: ['GET']
+        }
       },
       id: {
         link: url + '/things/hue/sensors/' + id,
@@ -118,7 +130,11 @@ module.exports = (id = ':id') => {
         },
         properties: {
           link: url + '/things/hue/sensors/' + id + '/properties',
-          method: ['GET']
+          method: ['GET'],
+          state: {
+            link: url + '/things/hue/sensors/' + id + '/properties/state',
+            method: ['GET']
+          }
         }
       }
     }
