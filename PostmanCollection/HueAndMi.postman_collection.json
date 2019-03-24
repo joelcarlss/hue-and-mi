@@ -1,0 +1,1558 @@
+{
+	"info": {
+		"_postman_id": "06fc831d-deb9-4c0f-9811-b69eff6d832d",
+		"name": "HueAndMi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "System",
+			"item": [
+				{
+					"name": "Connect to API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get model",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/model",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"model"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Actions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/actions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"actions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Actions AutoClean",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/actions/autoClean",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"actions",
+								"autoClean"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set action event on no movement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "fromHour",
+									"value": "9",
+									"type": "text"
+								},
+								{
+									"key": "toHour",
+									"value": "15",
+									"type": "text"
+								},
+								{
+									"key": "daysSinceLast",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "noMovement",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/actions/autoClean",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"actions",
+								"autoClean"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete action event on no movement",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "fromHour",
+									"value": "9",
+									"type": "text"
+								},
+								{
+									"key": "toHour",
+									"value": "15",
+									"type": "text"
+								},
+								{
+									"key": "daysSinceLast",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "clean",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/actions/autoClean/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"actions",
+								"autoClean",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get properties",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "fromHour",
+									"value": "9",
+									"type": "text"
+								},
+								{
+									"key": "toHour",
+									"value": "15",
+									"type": "text"
+								},
+								{
+									"key": "daysSinceLast",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "clean",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/properties",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get properties event on no movement",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "fromHour",
+									"value": "9",
+									"type": "text"
+								},
+								{
+									"key": "toHour",
+									"value": "15",
+									"type": "text"
+								},
+								{
+									"key": "daysSinceLast",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "clean",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/properties/autoClean",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"properties",
+								"autoClean"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get things",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "fromHour",
+									"value": "9",
+									"type": "text"
+								},
+								{
+									"key": "toHour",
+									"value": "15",
+									"type": "text"
+								},
+								{
+									"key": "daysSinceLast",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "clean",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/things",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vacuum",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/vacuum",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"vacuum"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get model",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/vacuum/model",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"vacuum",
+								"model"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get actions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/vacuum/actions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"vacuum",
+								"actions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set action Start Cleaning",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "cleanState",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/things/vacuum/actions/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"vacuum",
+								"actions",
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set action Stop Cleaning",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "cleanState",
+									"value": "false",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/things/vacuum/actions/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"vacuum",
+								"actions",
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set action Go to Dock",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "dockState",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/things/vacuum/actions/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"vacuum",
+								"actions",
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get properties",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/vacuum/properties",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"vacuum",
+								"properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get property Battery level",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/vacuum/properties/batteryLevel",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"vacuum",
+								"properties",
+								"batteryLevel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get property CleanState",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/vacuum/properties/cleanState",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"vacuum",
+								"properties",
+								"cleanState"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get property Clean log",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/vacuum/properties/cleanLog",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"vacuum",
+								"properties",
+								"cleanLog"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hue",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get gateway model",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/model",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"model"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get lights",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/lights/properties",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"lights",
+								"properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get property lights states",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/lights/properties/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"lights",
+								"properties",
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get lights id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/lights/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"lights",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get light model by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/lights/3/model",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"lights",
+								"3",
+								"model"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get light actions by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/lights/3/actions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"lights",
+								"3",
+								"actions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set light action state lightState by id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "lightState",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/lights/3/actions/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"lights",
+								"3",
+								"actions",
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set light action state brightness by id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "brightness",
+									"value": "40",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/lights/3/actions/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"lights",
+								"3",
+								"actions",
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set light action state color by id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "r",
+									"value": "33",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "g",
+									"value": "134",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "b",
+									"value": "255",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "brightness",
+									"value": "80",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "lightState",
+									"value": "true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "color",
+									"value": "{\n\t\t\"r\": \"33\",\n\t\t\"g\": \"134\",\n\t\t\"b\": \"255\"\n\t}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/lights/3/actions/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"lights",
+								"3",
+								"actions",
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get light properies by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/lights/3/properties",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"lights",
+								"3",
+								"properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get light propery state by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/lights/3/properties/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"lights",
+								"3",
+								"properties",
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get rooms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/rooms",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"rooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get rooms properties",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/rooms/properties",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"rooms",
+								"properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get rooms property state",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/rooms/properties/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"rooms",
+								"properties",
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get room by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/rooms/10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"rooms",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get room model by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/rooms/2/model",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"rooms",
+								"2",
+								"model"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get room actions by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/rooms/2/actions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"rooms",
+								"2",
+								"actions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set room action lightState by id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "state",
+									"value": "true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "lightState",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/rooms/10/actions/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"rooms",
+								"10",
+								"actions",
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set room action brightness by id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "brightness",
+									"value": "50",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/rooms/10/actions/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"rooms",
+								"10",
+								"actions",
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set room action color by id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "r",
+									"value": "33",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "g",
+									"value": "134",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "b",
+									"value": "255",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "brightness",
+									"value": "80",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "lightState",
+									"value": "true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "color",
+									"value": "{\n\t\t\"r\": \"33\",\n\t\t\"g\": \"134\",\n\t\t\"b\": \"255\"\n\t}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/rooms/10/actions/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"rooms",
+								"10",
+								"actions",
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get room properties by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/rooms/10/properties",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"rooms",
+								"10",
+								"properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get room property state by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/rooms/10/properties/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"rooms",
+								"10",
+								"properties",
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get sensors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/sensors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"sensors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get sensors properties",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/sensors/properties",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"sensors",
+								"properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get sensors property state",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/sensors/properties/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"sensors",
+								"properties",
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get sensor by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/sensors/41",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"sensors",
+								"41"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get sensor model by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/sensors/41/model",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"sensors",
+								"41",
+								"model"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get sensor properties by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/sensors/41/properties",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"sensors",
+								"41",
+								"properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get sensor property state by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/things/hue/sensors/41/properties/state",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"things",
+								"hue",
+								"sensors",
+								"41",
+								"properties",
+								"state"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
