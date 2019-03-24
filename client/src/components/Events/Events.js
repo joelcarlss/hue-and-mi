@@ -102,11 +102,11 @@ class Events extends Component {
 
         <div className="fakeBR"></div>
 
-        <span> Clean every <InputNumber min={1} max={14} defaultValue={0} onChange={(value) => this.setCleanEvery(value)} /> {' '} day </span>
+        <span> Clean every <InputNumber min={0} max={14} defaultValue={0} onChange={(value) => this.setCleanEvery(value)} /> {' '} day </span>
 
         <div className="fakeBR"></div>
 
-        <span>Clean when no movement for <InputNumber min={1} max={24} defaultValue={0} onChange={(value) => this.setCleanSinceLastMovment(value)} /> {' '} hours </span>
+        <span>Clean when no movement for <InputNumber min={0} max={24} defaultValue={0} onChange={(value) => this.setCleanSinceLastMovment(value)} /> {' '} hours </span>
 
         <div className="fakeBR"></div>
 
