@@ -25,7 +25,11 @@ module.exports = (id = ':id') => {
       method: ['GET'],
       properties: {
         link: url + '/things/hue/lights/properties',
-        method: ['GET']
+        method: ['GET'],
+        state: {
+          link: url + '/things/hue/lights/properties/state',
+          method: ['GET']
+        }
       },
       id: {
         link: url + '/things/hue/lights/' + id,
@@ -53,7 +57,11 @@ module.exports = (id = ':id') => {
         },
         properties: {
           link: url + '/things/hue/lights/' + id + '/properties',
-          method: ['GET']
+          method: ['GET'],
+          state: {
+            link: url + '/things/hue/lights/' + id + '/properties/state',
+            method: ['GET']
+          }
         }
       }
     },

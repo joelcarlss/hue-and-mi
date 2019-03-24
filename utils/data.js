@@ -166,3 +166,133 @@ exports.vacuum = {
     }
   }
 }
+
+exports.hue = {
+  home: {
+    title: 'Philip Hue',
+    description: 'Philips Hue Gateway'
+  },
+  model: {
+    title: 'Philip Hue',
+    description: 'Philips Hue Gateway',
+    manufacturer: 'Philips',
+    model: '2015',
+    tags: [
+      'hue',
+      'philips',
+      'philips hue',
+      'smart home',
+      'IoT',
+      'WoT'
+    ]
+  }
+}
+
+exports.lights = {
+  home: {
+    title: 'Philips hue Lights',
+    description: 'All Lights inside Philips Hue system'
+  },
+  properties: {
+    title: 'List of properties',
+    description: 'Get current status for every light',
+    resources: {
+      state: {
+        method: 'GET',
+        name: 'Light state',
+        description: 'Get current state of light'
+      }
+    }
+  },
+  id: {
+    home: {
+      title: 'Specific Light',
+      description: 'Light in Philips Hue system'
+    },
+    model: {
+      tags: [
+        'hue',
+        'philips hue',
+        'smart home',
+        'IoT',
+        'WoT'
+      ]
+    },
+    actions: {
+      title: 'List of actions',
+      resources: {
+        state: {
+          method: 'POST',
+          name: 'Change lights state',
+          description: 'Change value of current light.',
+          values: {
+            lightState: {
+              type: 'bool',
+              required: 'false'
+            },
+            brightness: {
+              type: 'enum',
+              enum: '0-100',
+              required: 'false'
+            },
+            color: {
+              type: 'object',
+              object: {
+                r: {
+                  type: 'enum',
+                  enum: '0-255'
+                },
+                g: {
+                  type: 'enum',
+                  enum: '0-255'
+                },
+                b: {
+                  type: 'enum',
+                  enum: '0-255'
+                }
+              },
+              required: 'false'
+            }
+          }
+        }
+      }
+    },
+    properties: {
+      title: 'List of properties',
+      description: 'Get current status of battery, cleanState and cleanLog',
+      resources: {
+        batteryLevel: {
+          method: 'GET',
+          name: 'Battery level',
+          description: 'Get current battery level in percent'
+        },
+        cleanState: {
+          method: 'GET',
+          name: 'Is Cleaning',
+          description: 'Get current status if the vecuum is cleaning'
+        },
+        cleanLog: {
+          method: 'GET',
+          name: 'Cleaning log',
+          description: 'Get array with timestamps of twenty ten last cleans'
+        }
+      }
+    }
+  }
+}
+
+exports.roooms = {
+  title: 'List of other connected units',
+  resources: {
+    hue: {
+      method: 'GET',
+      name: 'Get Philips Hue API',
+      description: 'Get info about Philips Hue gateway and connected devices and what they can do'
+    },
+    vacuum: {
+      method: 'GET',
+      name: 'Get vacuum API',
+      description: 'Get all data about Xiaomi vacuum cleaner its properties and actions'
+    }
+  }
+}

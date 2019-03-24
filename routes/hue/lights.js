@@ -1,12 +1,24 @@
 const utils = require('../../utils/hue')
+let linkData = require('../../utils/links')
+let aboutData = require('../../utils/data')
+let payload = require('../../utils/payload')
 module.exports = (server, hue) => {
   // All Lights
   server.get('/things/hue/lights', async (req, res, next) => {
-    res.send('HATEOAS HERE?')
+    let response = 'Welcome'
+    let data = aboutData.lights.home
+    let links = linkData().things.hue.lights
+    res.send(payload(links, data, response))
     next()
   })
   // All lights properties
   server.get('/things/hue/lights/properties', async (req, res, next) => {
+    let data = aboutData.lights.properties
+    let links = linkData().things.hue.lights.properties
+    res.send(payload(links, data))
+    next()
+  })
+  server.get('/things/hue/lights/properties/state', async (req, res, next) => {
     let result
     try {
       result = await hue.getLights()
@@ -14,40 +26,50 @@ module.exports = (server, hue) => {
     } catch (e) {
       result = utils.handleError(e)
     }
+    let data = aboutData.lights.properties.resources.state
+    let links = linkData().things.hue.lights.properties.state
+    res.send(payload(links, data, result))
     res.send(result)
     next()
   })
 
   server.get('/things/hue/lights/:id', async (req, res, next) => {
-    res.send('HATEOAS HERE')
+    let id = req.params.id
+    let data = aboutData.lights.id.home
+    let links = linkData(id).things.hue.lights.id
+    res.send(payload(links, data))
     next()
   })
 
   // Light by id model
   server.get('/things/hue/lights/:id/model', async (req, res, next) => {
-    let result = ''
+    let id = req.params.id
+    let result
     try {
-      let id = req.params.id
-
       result = await hue.getLightStateById(id)
         .then(({ id, type, name, modelid, manufacturername, productname, productid }) => ({ name, type, id, modelid, manufacturername, productname, productid }))
     } catch (e) {
       result = utils.handleError(e)
     }
-    res.send(result)
+    let data = aboutData.lights.id.model
+    let links = linkData(id).things.hue.lights.id.model
+    res.send(payload(links, data, result))
     next()
   })
 
   // Light by id actions
   server.get('/things/hue/lights/:id/actions', async (req, res, next) => {
-    res.send('What actions?')
+    let id = req.params.id
+    let data = aboutData.lights.id.actions
+    let links = linkData(id).things.hue.lights.id.actions
+    res.send(payload(links, data))
     next()
   })
 
   server.put('/things/hue/lights/:id/actions/state', async (req, res, next) => {
     let result
+    let id = req.params.id
     try {
-      let id = req.params.id
       let lightState = req.body.lightState
       let brightness = req.body.brightness
       let color = req.body.color
@@ -69,12 +91,21 @@ module.exports = (server, hue) => {
     } catch (e) {
       result = utils.handleError(e)
     }
-    res.send(result)
+    let data = aboutData.lights.id.actions.resources.state
+    let links = linkData(id).things.hue.lights.id.actions.state
+    res.send(payload(links, data, result))
     next()
   })
 
   // Light by id properties
   server.get('/things/hue/lights/:id/properties', async (req, res, next) => {
+    let id = req.params.id
+    let data = aboutData.lights.id.properties
+    let links = linkData(id).things.hue.lights.id.properties
+    res.send(payload(links, data))
+    next()
+  })
+  server.get('/things/hue/lights/:id/properties/state', async (req, res, next) => {
     let result = ''
     try {
       let id = req.params.id
