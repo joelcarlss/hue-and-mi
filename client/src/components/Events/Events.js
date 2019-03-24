@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, TimePicker, Table, Timeline, InputNumber, Icon, Input } from 'antd'
+import { Button, TimePicker, Table, InputNumber, Icon, Input } from 'antd'
 import moment from 'moment'
 import { addEvent, deleteEvent } from '../../actions/eventActions'
 import { getEvents } from '../../actions/fetchEvents'
@@ -127,26 +127,6 @@ class Events extends Component {
         <hr />
 
         <div className="fakeBR"></div>
-
-        <h2> Cleaning History <Icon type="calendar" /> </h2>
-
-        <div className="fakeBR"></div>
-
-        <Timeline>
-          <Timeline.Item color='green'>Create a services site 2015-09-01</Timeline.Item>
-          <Timeline.Item color='green'>Create a services site 2015-09-01</Timeline.Item>
-          <Timeline.Item color='red'>
-            <p>Solve initial network problems 1</p>
-          </Timeline.Item>
-          <Timeline.Item color='red'>
-            <p>Solve initial network problems 3 2015-09-01</p>
-          </Timeline.Item>
-          <Timeline.Item>
-            <p>Technical testing 3 2015-09-01</p>
-          </Timeline.Item>
-          <Timeline.Item color='green'>Create a services site 2015-09-01</Timeline.Item>
-          <Timeline.Item color='green'>Create a services site 2015-09-01</Timeline.Item>
-        </Timeline>
 
       </div>
     )

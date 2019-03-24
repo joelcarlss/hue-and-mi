@@ -25,7 +25,6 @@ export const toggelAllLightsInRoom = (id, bool) => {
 export const toggelLightInRoom = (id, bool) => {
   let params = new URLSearchParams()
 
-  console.log(bool)
   params.append('lightState', bool)
 
   axios.put(`things/hue/lights/${id}/actions/state`, params)
@@ -43,8 +42,8 @@ export const toggelLightInRoom = (id, bool) => {
 
 export const getLampState = async (id) => {
   try {
-    let { data } = await axios.get(`things/hue/lights/${id}/properties`)
-    return data
+    let { data } = await axios.get(`things/hue/lights/${id}/properties/state`)
+    return data.response
   } catch (error) {
   }
 }
@@ -55,8 +54,8 @@ export const getLampState = async (id) => {
 
 export const getRoomState = async (id) => {
   try {
-    let { data } = await axios.get(`things/hue/rooms/${id}/properties`)
-    return data
+    let { data } = await axios.get(`things/hue/rooms/${id}/properties/state`)
+    return data.response
   } catch (error) {
   }
 }

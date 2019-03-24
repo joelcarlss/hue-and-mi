@@ -6,9 +6,9 @@ const axios = require('axios')
 
 export const getRooms = async (value) => {
   try {
-    let { data } = await axios.get('things/hue/rooms/properties')
+    let data = await axios.get('things/hue/rooms/properties/state')
 
-    return data
+    return data.data.response
   } catch (e) {
     console.log(e)
   }
