@@ -1,7 +1,6 @@
 # grupp10-vt19
 ## Project: Hue and Mi
 Students: Carl Einarsson & Joel Carlsson
-Demo: https://www.youtube.com/watch?v=5FuaAyQuhfw
 
 ### What Does Hue and Mi do?
 This application is built to create a smarter home that will make smart things communicating with each other.
@@ -23,9 +22,6 @@ and give the user access to all data and full controll of every unit in a mouse 
 ### Find
 Due to the risk of leaking to private data, this app will be used as a local project in the LAN scope. 
 The application holds data about the exact movement of every room and one can easily get information if someone is currently home or away.
-Therefore this app will be demonstrated with a movie clip.
-Demo: https://www.youtube.com/watch?v=5FuaAyQuhfw
-
 
 ### Implementing the application with the theories of Web of Things
 
